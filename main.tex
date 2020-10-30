@@ -35,6 +35,48 @@ headache, haemoptysis and diarrhoea.\cite{symptoms}
 
 \section{Review}
 
+\textbf{Results of 10 CNN}\cite{firstreview}
+
+They used 10 Convolutional Neural Networks. The network with the best accuracy was ResNet-101\cite{resnet} and the accuracy was 99.51 percent.
+The number of COVID-19 patients is 108 (48 female and 60 male) and for non-COVID-19 is 86 (35 female and 51 male). The age of COVID-19 is 50.22 +- 10.85
+and of non-COVID-19 is 61.45 +- 15.04. The images converted to grayscale and reviewed by an experianced radiologist.The input layer of the CNNs were replaced
+with a new one. The dimension of the last fully connected layer of all networks was set to the number of the classes. All the networks were trained with SGDM 
+optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the dataset shuffled. The dataset divided to 80 percent train and 20 percent validation. 
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Results of 10 CNN}
+    \label{tab:table1}
+    \begin{tabular}{||c c c c c ||}
+      \hline 
+      \textbf{Reference} & \textbf{Network} & \textbf{Depth} & \textbf{Parameters} & \textbf{Accuracy}\\ 
+      \hline
+      \cite{alexnet} & AlexNet & 8 & 61 & 78.92  \\ % <--
+      \hline
+      \cite{vgg} & VGG-16 & 16 & 138 & 83.33  \\ % <--
+	  \hline
+      \cite{vgg} & VGG-19 & 19 & 144 & 85.29  \\ % <--
+      \hline 
+      \cite{squeezenet} & SqueezeNet & 18 & 1.24 & 82.84  \\ % <--
+      \hline
+      \cite{googlenet} & GoogleNet & 22 & 7 & 85.29  \\ % <--
+      \hline
+      \cite{mobilenet} & MobileNet-V2 & 53 & 3.5 & 92.16  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-18 & 18 & 11.7 & 91.67  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-50 & 50 & 25.6 & 94.12  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-101 & 101 & 44.6 & 99.51  \\ % <--
+      \hline
+      \cite{xception} & Xception & 71 & 22.9 & 99.02  \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\section{Results}
+
 \section{Research}
 
 \section{Results}
