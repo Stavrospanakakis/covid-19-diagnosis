@@ -1,12 +1,15 @@
 \documentclass{article}
 
 \usepackage{graphicx}
+\usepackage{float}
+\usepackage{multicol}
 
 \title{Covid-19 study with Neural Networks}
 \author{Stavros Panakakis, Sophia Tsivoula}
 
 \begin{document}
 	\maketitle
+	
 
 \section{Introduction}
 The first novel Coronavirus (COVID-19) disease cases confirmed at a seafood wholesale market in Wuhan, China in December 2019 with pneumonia of 
@@ -17,13 +20,13 @@ headache, haemoptysis and diarrhoea.\cite{symptoms}
 
 \subsection{Cases}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \includegraphics[width=\linewidth]{cases/worldwide/plot.png}
   \caption{Covid-19 worldwide cases.}
   \label{fig:worldwidecases}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
 \includegraphics[width=\linewidth]{cases/greece/plot.png}
   \caption{Covid-19 Cases in Greece.}
   \label{fig:greececases}
@@ -35,7 +38,7 @@ headache, haemoptysis and diarrhoea.\cite{symptoms}
 
 \section{Review}
 
-\textbf{Results of 10 CNN}\cite{firstreview}
+\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite{firstreview}
 
 They used 10 Convolutional Neural Networks. The network with the best accuracy was ResNet-101\cite{resnet} and the accuracy was 99.51 percent.
 The number of COVID-19 patients is 108 (48 female and 60 male) and for non-COVID-19 is 86 (35 female and 51 male). The age of COVID-19 is 50.22 +- 10.85
@@ -43,7 +46,7 @@ and of non-COVID-19 is 61.45 +- 15.04. The images converted to grayscale and rev
 with a new one. The dimension of the last fully connected layer of all networks was set to the number of the classes. All the networks were trained with SGDM 
 optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the dataset shuffled. The dataset divided to 80 percent train and 20 percent validation. 
 
-\begin{table}[h!]
+\begin{table}[H]
   \begin{center}
     \caption{Results of 10 CNN}
     \label{tab:table1}
@@ -74,6 +77,12 @@ optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the da
     \end{tabular}
   \end{center}
 \end{table}
+
+\textbf{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
+
+The network they used is DarkCovidNet which is based on Darknet-19\cite{darknet}as a starting point. The dataset that used is "A COVID-19 X-ray image databse" which developed by Cohen JP\cite{dataset1secondreview}. There are not complete metadata at the dataset. The patients that have COVID-19 in the dataset are 125(43 female and 82 male). The average age of 26 of them is 55 years. Another dataset is ChestX-ray8 database which developed by Wang et al.\cite{dataset2secondreview} and was used for normal and pneumonia images. It is used optimizer=Adam, loss function=cross entropy and learning rate=3e-3.The datasets divided to 80 percent train and 20 percent validation. The model outputs evaluated by an expert radiologist. They did it with 2 ways. With binary(covid vs healthy) as well as multi classes (covid vs pneumonia vs health). The accuracy for binary is 98.08 and for multi classes 87.02.
+
+\textbf{Computer-aided detection of COVID-19 from X-rayimages using multi-CNN and Bayesnet classifier}\cite{thirdreview}
 
 \section{Results}
 
@@ -131,6 +140,30 @@ K. He, X. Zhang, et al.
 Chollet, François. 
 \textit{Xception: Deep learning with depthwise separable convolutions.}. Proceedings of the IEEE conference on computer vision and pattern recognition. 2017.
 
-\end{thebibliography}
+\bibitem{secondreview}
+Ozturk, Tulin, et al. 
+\textit{Automated detection of COVID-19 cases using deep neural networks with X-ray images}. 
+Computers in Biology and Medicine (2020): 103792.
 
+\bibitem{darknet}
+Redmon, Joseph et al.
+\textit{YOLO9000: better, faster, stronger.}.
+Proceedings of the IEEE conference on computer vision and pattern recognition. 2017.
+
+\bibitem{dataset1secondreview}
+J.P. Cohen
+\textit{COVID-19 Image Data Collection. 2020.}
+https://github.com/ieee8023/COVID-chestxray-dataset.
+
+\bibitem{dataset2secondreview}
+X. Wang et al. 
+\textit{Chestx-ray8: hospital-scale chest x-ray database and benchmarks on weakly-supervised classification and localization of common thorax diseases}
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017, pp. 2097–2106.
+
+\bibitem{thirdreview}
+Abraham, Bejoy et al. 
+\textit{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier.}.
+Biocybernetics and biomedical engineering 40.4 (2020): 1436-1445.
+
+\end{thebibliography}
 \end{document}
