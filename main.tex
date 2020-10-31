@@ -82,7 +82,22 @@ optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the da
 
 The network they used is DarkCovidNet which is based on Darknet-19\cite{darknet}as a starting point. The dataset that used is "A COVID-19 X-ray image databse" which developed by Cohen JP\cite{dataset1secondreview}. There are not complete metadata at the dataset. The patients that have COVID-19 in the dataset are 125(43 female and 82 male). The average age of 26 of them is 55 years. Another dataset is ChestX-ray8 database which developed by Wang et al.\cite{dataset2secondreview} and was used for normal and pneumonia images. It is used optimizer=Adam, loss function=cross entropy and learning rate=3e-3.The datasets divided to 80 percent train and 20 percent validation. The model outputs evaluated by an expert radiologist. They did it with 2 ways. With binary(covid vs healthy) as well as multi classes (covid vs pneumonia vs health). The accuracy for binary is 98.08 and for multi classes 87.02.
 
-\textbf{Computer-aided detection of COVID-19 from X-rayimages using multi-CNN and Bayesnet classifier}\cite{thirdreview}
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/architecture-of-the-darkcovidnet-ozturk-tulin-et-al.png}
+  \caption{Architecture of the DarkCovidNet}
+  \label{fig:paper3architecture}
+\end{figure}
+
+\textbf{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier}\cite{thirdreview}
+
+This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception}, Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID images(bacterial, varial pneumonia) and had 91.16 percent accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID images and had 97.44 percent accuracy. 
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png}
+  \caption{Architecture of the proposed method}
+  \label{fig:paper3architecture}
+\end{figure}
+
 
 \section{Results}
 
@@ -165,5 +180,29 @@ Abraham, Bejoy et al.
 \textit{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier.}.
 Biocybernetics and biomedical engineering 40.4 (2020): 1436-1445.
 
+\bibitem{dataset1.2thirdreview}
+Kermany, et al.
+\textit{Identifying medical diagnoses and treatable diseases by image-based deep learning.}.
+Cell 172.5 (2018): 1122-1131.
+
+\bibitem{dataset2thirdreview}
+Dadario AMV. Covid-19 X rays; 2020.
+\textit{http://dx.doi.org/10.34740/KAGGLE/DSV/101946}. 
+Available from:https://www.kaggle.com/dsv/1019469. 
+
+\bibitem{imagenet}
+Deng J et al.
+\textit{Imagenet: alarge-scale hierarchical image database.}.
+2009 IEEEConference on Computer Vision and Pattern Recognition.IEEE; 2009. p. 248–55.
+
+\bibitem{shufflenet}
+Zhang X et al.
+\textit{Shufflenet: an extremelyefficient convolutional neural network for mobile devices.}.
+Proceedings of the IEEE Conference on Computer Visionand Pattern Recognition; 2018. p. 6848–56.
+
+\bibitem{darknetpaper3}
+Redmon J et al. 
+\textit{Yolov3: an incremental improvement.}.
+2018, arXiv preprint arXiv:1804.02767
 \end{thebibliography}
 \end{document}
