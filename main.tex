@@ -53,14 +53,10 @@ The most common symptoms of the virus today are fever, cough, fatigue, expectora
 \section{Need for analytics}
 
 \section{Review}
-
-\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite{firstreview}
-
-They used 10 Convolutional Neural Networks. The network with the best accuracy was ResNet-101\cite{resnet} and the accuracy was 99.51 percent.
-The number of COVID-19 patients is 108 (48 female and 60 male) and for non-COVID-19 is 86 (35 female and 51 male). The age of COVID-19 is 50.22 +- 10.85
-and of non-COVID-19 is 61.45 +- 15.04. The images converted to grayscale and reviewed by an experianced radiologist.The input layer of the CNNs were replaced
-with a new one. The dimension of the last fully connected layer of all networks was set to the number of the classes. All the networks were trained with SGDM 
-optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the dataset shuffled. The dataset divided to 80 percent train and 20 percent validation. 
+\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
+\\
+\\
+The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 ± 10.85 and of non-COVID-19 is 61.45 ± 15.04. In order to create the CNN, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shaffled and if the training process stayed the same, the training process stopped.
 
 \begin{table}[H]
   \begin{center}
