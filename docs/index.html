@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h3>Convolutional Neural Networks for
+					the detection of COVID-19</h3>
+				</section>
+				<section>
+					<p style="text-align:left;font-weight: bold;">Cases</p>
+					<div style="display: flex; justify-content: space-between;">
+						<img src="./assets/plot_worldwide.png" alt="">
+						<div>
+							<p style="font-weight: bold;">Worldwide</p>
+							<p style="font-size: 0.6em;">Total: 54.1 million</p>
+							<p style="font-size: 0.6em;">Recovered: 34.8 million</p>
+							<p style="font-size: 0.6em;">Deaths: 1.31 million</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p style="text-align:left;font-weight: bold;">Cases</p>
+					<div style="display: flex; justify-content: space-between;">
+						<img src="./assets/plot_greece.png" alt="">
+						<div>
+							<p style="font-weight: bold;">Greece</p>
+							<p style="font-size: 0.6em;">Total: 74205</p>
+							<p style="font-size: 0.6em;">Recovered: 34321</p>
+							<p style="font-size: 0.6em;">Deaths: 1106</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p style="font-weight: bold;">Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier</p>
+				</section>
+				<section>
+					<div style="display: flex;justify-content: space-between;">
+						<div>
+							<table style="border: 1px solid black;">
+								<tr>
+									<th>Networks</th>
+								</tr>
+								<tr>
+									<td>Shufflenet</td>
+								</tr>
+								<tr>
+									<td>Darknet-53</td>
+								</tr>
+								<tr>
+									<td>Squeezenet</td>
+								</tr>
+								<tr>
+									<td>MobilenetV2</td>
+								</tr>
+								<tr>
+									<td>Xception</td>
+								</tr>
+								</table>
+						</div>
+						<!-- <div style="color:#f1f1f1;border-left: 2px solid black;">.</div> -->
+						<li style="margin-top:120px;">Feature matrix<br> of dimension<br> 950x5000</li>
+					</div>
+					
+				</section>
+				<section>
+				<p style="font-weight: bold;">Architecture</p>
+				<p style="font-size: 0.6em;">Feature Matrix > Bayesnet Classfier > Covid vs Non-Covid</p>
+				<img src="./assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png" alt="">
+				</section>
+					<section>
+					<div style="display: flex; justify-content: space-between;">
+						<div>
+							<p style="font-weight: bold;">Dataset #1</p>
+							<p style ="font-size: 0.6em;"><strong>Covid-19 images:</strong> 453</p>
+							<p style ="font-size:0.6em;"><strong>Non-Covid images:</strong> 497</p>
+							<p style ="font-size:0.6em;"><strong>Accuracy:</strong> 91.16%</p>
+						</div>
+						<div>
+							<p style="font-weight: bold;">Dataset #2</p>
+							<p style="font-size: 0.6em;"><strong>Covid-19 images:</strong> 71</p>
+							<p style="font-size: 0.6em;"><strong>Non-Covid-19 images:</strong> 7</p>
+							<p style="font-size: 0.6em;"><strong>Accuracy:</strong> 97.44%</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p style="font-weight: bold;">Application of deep learning 
+						technique to manage COVID-19 in routine clinical practice
+						using CT images: Results of 10 convolutional neural networks</p>
+				</section>
+				<section>
+					<table style="font-size: 0.6em;">
+						<tr>
+							<th>Network</th>
+							<th>Depth</th>
+							<th>Parameters</th>
+							<th>Accuracy</th>
+						</tr>
+						<tr>
+							<td>AlexNet</td>
+							<td>8</td>
+							<td>61</td>
+							<td>78.92</td>
+						</tr>
+						<tr>
+							<td>VGG-16</td>
+							<td>16</td>
+							<td>138</td>
+							<td>83.33</td>
+						</tr>
+						<tr>
+							<td>VGG-19</td>
+							<td>19</td>
+							<td>144</td>
+							<td>85.29</td>
+						</tr>
+						<tr>
+							<td>Squeezenet</td>
+							<td>18</td>
+							<td>1.24</td>
+							<td>82.84</td>
+						</tr>
+						<tr>
+							<td>GoogleNet</td>
+							<td>22</td>
+							<td>7</td>
+							<td>85.29</td>
+						</tr>
+						<tr>
+							<td>MobilenetV2</td>
+							<td>53</td>
+							<td>3.5</td>
+							<td>92.16</td>
+						</tr>
+						<tr>
+							<td>ResNet-18</td>
+							<td>18</td>
+							<td>11.7</td>
+							<td>91.67</td>
+						</tr>
+						<tr>
+							<td>ResNet-50</td>
+							<td>50</td>
+							<td>25.6</td>
+							<td>94.12</td>
+						</tr>
+						<tr style="background-color: #e62b1e;color:white">
+							<td>ResNet-101</td>
+							<td>101</td>
+							<td>44.6</td>
+							<td>99.51</td>
+						</tr>
+						<tr style="background-color: rgb(79, 132, 42);color:white">
+							<td>Xception</td>
+							<td>71</td>
+							<td>22.9</td>
+							<td>99.02</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<div style="display: flex; justify-content: space-between;">
+						<div>
+							<p style="font-weight: bold;">Positive</p>
+							<p style ="font-size: 0.6em;"><strong>No of patients:</strong> 108</p>
+							<p style ="font-size:0.6em;"><strong>Age:</strong> 50.22 ± 10.85</p>
+							<p style ="font-size:0.6em;"><strong>Female:</strong> 48</p>
+							<p style ="font-size:0.6em;"><strong>Male:</strong> 60</p>
+						</div>
+						<p style="font-weight:bold;">Covid-19</p>
+						<div>
+							<p style="font-weight: bold;">Negative</p>
+							<p style="font-size: 0.6em;"><strong>No of patients:</strong> 86</p>
+							<p style ="font-size:0.6em;"><strong>Age:</strong>  61.45 ± 15.04</p>
+							<p style="font-size: 0.6em;"><strong>Female:</strong>  35</p>
+							<p style="font-size: 0.6em;"><strong>Male:</strong> 51</p>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p style="font-weight: bold;">Architecture</p>
+					<div style="display: flex;justify-content: space-between;">
+						<img style="width:60%;" src="./assets/architecture-of-10-CNN.png" alt="">
+						<div style="text-align:left;margin-top:170px;">
+							<li style="font-size: 0.6em"><strong>Optimizer:</strong> SGDM</li>
+							<li style="font-size: 0.6em"><strong>Learning Rate:</strong> 0.01</li>
+							<li style="font-size: 0.6em"><strong>Validation Frequency:</strong> 5</li>
+							<li style="font-size: 0.6em"><strong>Train / Validation:</strong> 80 / 20</li>
+							<li style="font-size: 0.6em"><strong>Dataset shuffled:</strong> Each epoch</li>
+
+
+							
+
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
