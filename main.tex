@@ -3,18 +3,36 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{multicol}
+%\usepackage{geometry}
+% \geometry{
+% a4paper,
+% total={170mm,257mm},
+% left=20mm,
+% top=20mm,
+% }
+
 
 \title{Covid-19 study with Neural Networks}
 \author{Stavros Panakakis, Sophia Tsivoula}
 
 \begin{document}
 	\maketitle
-	
+
+\section{Summary}		
 
 \section{Introduction}
-Coronavirus (COVID-19) is a new virus that has evolved into a pandemic on March 2020. Specifically, the first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in seafood wholesale market. A number of attends initially diagnosed with a form of pneumonia where later discovered through samples of sufferers, that originates from an unknown (till then) beta-coronavirus virus.\cite{firstcases} 
+Coronavirus (COVID-19) is a newly infectious disease that has evolved into a pandemic on March 2020. Specifically, the first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in seafood wholesale market. A number of attends initially diagpatientsnosed with a form of pneumonia where later discovered through samples of sufferers, that originates from an unknown (till then) beta-coronavirus virus.\cite{firstcases} 
 
-The most common symptoms of the virus today are fever, cough, fatigue, expectoration and shortness of breath. More rarely, sufferers experience headaches or dizziness, diarrhea, nausea and vomiting.\cite{symptoms1}. 
+The most common symptoms of the virus today are fever, cough, fatigue, expectoration and shortness of breath. More rarely, sufferers experience headaches or dizziness, diarrhea, nausea and vomiting.\cite{symptoms1}. Examining the samples from the sufferers, it was observed that some social groups are more likely to get infected and experience severe respiratory problems originated from the virus. These social groups are people with health problems as hypertension, cardia-cerebrovascular disease and diabetes. More specifically at least eight percent of patients suffer from cardiac injuries \cite{patients}.
+
+Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than DNA virus. This is the reason why  Coronaviruses are easy to adopt in different environments in order to survive and reproduce. Although COVID-19 is not as virulent as influenza viruses, humans have developed a certain degree of immunity from influenza through years of exposure, which did not happen with COVID-19, therefore making it more life threatening \cite{medicalCOVID}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/cases-in-china.png}
+  \caption{Impact of cardiovascular metabolic diseases on COVID-19 in China}
+  \label{fig:CovidCasesChina}
+\end{figure}
+
 
 \section{Impact of Covid-19}
 
@@ -37,14 +55,10 @@ The most common symptoms of the virus today are fever, cough, fatigue, expectora
 \section{Need for analytics}
 
 \section{Review}
-
-\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite{firstreview}
-
-They used 10 Convolutional Neural Networks. The network with the best accuracy was ResNet-101\cite{resnet} and the accuracy was 99.51 percent.
-The number of COVID-19 patients is 108 (48 female and 60 male) and for non-COVID-19 is 86 (35 female and 51 male). The age of COVID-19 is 50.22 +- 10.85
-and of non-COVID-19 is 61.45 +- 15.04. The images converted to grayscale and reviewed by an experianced radiologist.The input layer of the CNNs were replaced
-with a new one. The dimension of the last fully connected layer of all networks was set to the number of the classes. All the networks were trained with SGDM 
-optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the dataset shuffled. The dataset divided to 80 percent train and 20 percent validation. 
+\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
+\\
+\\
+The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 ± 10.85 and of non-COVID-19 is 61.45 ± 15.04. In order to create the CNN, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shaffled and if the training process stayed the same, the training process stopped.
 
 \begin{table}[H]
   \begin{center}
@@ -79,8 +93,10 @@ optimizer, learning rate=0.01 and validation frequency = 5. In each epoch the da
 \end{table}
 
 \textbf{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
+\\ 
+\\
+The second paper called “Automated detection of COVID-19 cases using deep neural networks with X-ray images” trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper were used two different datasets. The first one was called "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}. The dataset does not contain enough metadata referring to patients nevertheless, there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another information is that out of 26 patients the average age of them was 55 years. The second dataset that was used was the “ChestX-ray8 database” which was developed by Wang et al. \cite{dataset2secondreview}. This dataset contained X-ray images with healthy patients and patients with normal pneumonia however, it does not provide any metadata for the patients. The network had two different variants. The first one was able to detect whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset, only the X-rays with healthy patients  were used, to help the network to classify a patient as healthy or COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in order to get all three different results. The network used was the “DarkCovidNet” which is based on “Darknet-19” \cite{darknet}, the optimizer was Adam, cross entropy was used as a loss function and the learning rate was 3e-3. 
 
-The network they used is DarkCovidNet which is based on Darknet-19\cite{darknet}as a starting point. The dataset that used is "A COVID-19 X-ray image databse" which developed by Cohen JP\cite{dataset1secondreview}. There are not complete metadata at the dataset. The patients that have COVID-19 in the dataset are 125(43 female and 82 male). The average age of 26 of them is 55 years. Another dataset is ChestX-ray8 database which developed by Wang et al.\cite{dataset2secondreview} and was used for normal and pneumonia images. It is used optimizer=Adam, loss function=cross entropy and learning rate=3e-3.The datasets divided to 80 percent train and 20 percent validation. The model outputs evaluated by an expert radiologist. They did it with 2 ways. With binary(covid vs healthy) as well as multi classes (covid vs pneumonia vs health). The accuracy for binary is 98.08 and for multi classes 87.02.
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{assets/architecture-of-the-darkcovidnet-ozturk-tulin-et-al.png}
@@ -122,6 +138,16 @@ Journal of medical virology 92.6 (2020): 577-583.
 Huang, Chaolin, et al. 
 \textit{Clinical features of patients infected with 2019 novel coronavirus in Wuhan, China.}.
 The lancet 395.10223 (2020): 497-506.
+
+\bibitem{patients}
+Li, Bo, et al. 
+\textit {Prevalence and impact of cardiovascular metabolic diseases on COVID-19 in China.} 
+Clinical Research in Cardiology 109.5 (2020): 531-538.
+
+\bibitem{medicalCOVID}
+Abdulamir, Ahmed S., and Rand R. Hafidh.
+\textit{The Possible Immunological Pathways for the Variable Immunopathogenesis of COVID--19 Infections among Healthy Adults, Elderly and Children.}
+Electronic Journal of General Medicine 17.4 (2020).
 
 \bibitem{firstreview}
 Ardakani, Ali Abbasian, et al. 
