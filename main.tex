@@ -122,16 +122,86 @@ This paper has a combination of features extracted from multi-CNN and used the B
 
 
 \section{COVnet-101}
-Except from reviewing papers, we decided to create a custom network based on ResNet-101\cite{resnet}. 
 
-- add information about resnet 
-- mention datasets (which are , no of images, labels, validation/train)
-- mention evaluation method
-- mention input shape
-- mention parameters
-- mention image proccessing
-- mention binary and categorical crossentropy
-- mention description of the models
+\subsection{ResNet-101}
+Except from reviewing papers, we decided to create a custom network based on ResNet-101\cite{resnet}. Here will be many information about ResNet-101.
+
+\subsection{Datasets}
+The dataset used for healthy and pneumonia chest x-ray images is from Kaggle created by Paul Mooney.\cite{dataset1custom}. It contains 5,863 images. The datasets used for COVID-19 are 
+The datasets which used were "A COVID-19 X-ray image database" which was developed by Cohen JP\cite{dataset1secondreview} and "COVID-19 Chest X-ray Dataset Initiative"\cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative"\cite{datasetcustomcovid}. The total images are 6432. The 80 percent of the data used for train and the 20 percent for validation. 
+
+\subsection{Image proccesing}
+The image proccesing of the images is to resize them to 128x128, Shuffle them and normalize them by dividing with 255. 
+
+\subsection{Paramaters}
+The input shape of the network is (5144, 128, 128 3), the dataset shuffled after every epoch, the batch size is 16, the optimizer is Adam and the learning rate is 0.01. 
+
+We created two versions of the network. The one which was CovidvsNonCovid and the other was CovidvsHealthyvsPneumonia.
+
+\subsection{COVID vs Healthy vs Pneumonia}
+
+The Loss function which was used is Categorical Crossentropy and the Last’s layer function is Softmax because of the fact that they were 3 different labels.
+
+Here add the math and the plot of the softmax function.
+
+The total parameterss of the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176
+
+Add accuracy
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Covid vs healthy vs pneumonia}
+    \label{tab:table3}
+    \begin{tabular}{||c c c ||}
+	  \hline
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Param}  \\  % <--
+      \hline
+      resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
+      \hline
+      flatten (Flatten) & (None, 32768) & 0 \\ % <--
+      \hline
+      dense (Dense) & (None, 1024) & 33555456 \\ % <--
+      \hline 
+      dropout (Dropout) & (None, 1024) & 0 \\ % <--
+      \hline
+      dense1 (Dense) & (None, 3) & 3075 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+\subsection{Covid vs NonCovid}
+
+The Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are 2 different labels.
+
+Here add the math and the plot of the softmax function.
+
+The total parameterss of the network are 76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.
+
+Add accuracy
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Covid vs Non-Covid}
+    \label{tab:table3}
+    \begin{tabular}{||c c c ||}
+	  \hline
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Param}  \\  % <--
+      \hline
+      resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
+      \hline
+      flatten (Flatten) & (None, 32768) & 0 \\ % <--
+      \hline
+      dense (Dense) & (None, 1024) & 33555456 \\ % <--
+      \hline 
+      dropout (Dropout) & (None, 1024) & 0 \\ % <--
+      \hline
+      dense1 (Dense) & (None, 1) & 1025 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 \section{Results}
 
@@ -250,5 +320,15 @@ Proceedings of the IEEE Conference on Computer Visionand Pattern Recognition; 20
 Redmon J et al. 
 \textit{Yolov3: an incremental improvement.}.
 2018, arXiv preprint arXiv:1804.02767
+
+\bibitem{dataset1custom}
+Paul Mooney. Chest X-Ray Images (Pneumonia); 2017
+\textit{Kaggle.}.
+Available from: https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia. 
+
+\bibitem{datasetcustomcovid}
+Wang et al.
+\textit{COVID-Net: a tailored deep convolutional neural network design for detection of COVID-19 cases from chest X-ray images}
+2020, https://doi.org/10.1038/s41598-020-76550-z
 \end{thebibliography}
 \end{document}
