@@ -18,7 +18,7 @@
 \begin{document}
 	\maketitle
 
-\section{Summary}		
+\section{Abstract}		
 
 \section{Introduction}
 Coronavirus (COVID-19) is a newly infectious disease that has evolved into a pandemic in March 2020. Specifically, the first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in a seafood wholesale market. A number of patients initially diagnosed with a form of pneumonia, that later discovered through samples of sufferers, that originates from an unknown, till then, beta-coronavirus virus \cite{firstcases}.
@@ -124,7 +124,29 @@ This paper has a combination of features extracted from multi-CNN and used the B
 \section{COVnet-101}
 
 \subsection{ResNet-101}
-Except from reviewing papers, we decided to create a custom network based on ResNet-101\cite{resnet}. Here will be many information about ResNet-101.
+Except from reviewing papers, we decided to create a custom network based on ResNet-101\cite{resnet}. Here will be many information about ResNet. ResNet is trained using ImageNet 2012 Dataset.\cite{imagenet} For the creation of Resnet network, two models were trained, a plain and a residual. The plain network is inspired by the philosophy of VGG networks.\cite{vgg} The convolutional layers have mostly 3x3 filters, The network ends with global averages pooling layer and 1000-way-fully-connected layer with softmax. The total number of
+weighted layers is 34. Residual Network is based on the plain network mentioned above. It adds shortcut connections which turn the network into its counterpart residual version. ////The identity
+shortcuts (Eqn.(1)) can be directly used when the input and
+output are of the same dimensions (solid line shortcuts in
+Fig. 3). When the dimensions increase (dotted line shortcuts
+in Fig. 3), we consider two options: (A) The shortcut still
+performs identity mapping, with extra zero entries padded
+for increasing dimensions. This option introduces no extra
+parameter; (B) The projection shortcut in Eqn.(2) is used to
+match dimensions (done by 1×1 convolutions). For both
+options, when the shortcuts go across feature maps of two
+sizes, they are performed with a stride of 2.////
+The network we used is a residual one with 101 layers. For the creation of ResNet-101 was used more 3-layer blocks. Is is more accurate from the plain ones. 
+
+
+ About the dataset, imagenet 2012 has 1000 classes and the models is trained at 1.28 million images and evalutated on 50k validation images. Image were cropped to 224×224 randomly sampled from an image or its horizontal flip, with the per-pixel mean subtracted. It was also used standard color augmentation.\cite{imagenet} It was also again used batch normalization\cite{batchnormalization} right after each convolution and before activation, following. The optimizer was SGD with a mini-batch size of 256.The learning rate starts from 0.1 and is divided by 10 when the error plateaus, and the models are trained for up to 60 × 104 iterations. It was 
+used a weight decay of 0.0001 and a momentum of 0.9. It was not used dropout.\cite{dropout}
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/resnet-vs-vgg.png}
+  \caption{VGG vs ResNet}
+  \label{fig:vggvsresnet}
+\end{figure}
 
 \subsection{Datasets}
 The dataset used for healthy and pneumonia chest x-ray images is from Kaggle created by Paul Mooney.\cite{dataset1custom}. It contains 5,863 images. The datasets used for COVID-19 are 
@@ -146,7 +168,7 @@ Here add the math and the plot of the softmax function.
 
 The total parameterss of the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176
 
-Add accuracy
+The accuracy was 91,5 percent
 
 \begin{table}[H]
   \begin{center}
@@ -179,7 +201,7 @@ Here add the math and the plot of the softmax function.
 
 The total parameterss of the network are 76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.
 
-Add accuracy
+The accuracy was 97,4 percent
 
 \begin{table}[H]
   \begin{center}
@@ -330,5 +352,18 @@ Available from: https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia.
 Wang et al.
 \textit{COVID-Net: a tailored deep convolutional neural network design for detection of COVID-19 cases from chest X-ray images}
 2020, https://doi.org/10.1038/s41598-020-76550-z
+
+\bibitem{batchnormalization}
+S. Ioffe and C. Szegedy. 
+\textit{Batch normalization: Accelerating deep
+network training by reducing internal covariate shift.}.
+In ICML, 2015.
+
+\bibitem{dropout}
+G. E. Hinton et al. 
+\textit{Improving neural networks by preventing co-
+adaptation of feature detectors.}.
+arXiv:1207.0580, 2012.
+
 \end{thebibliography}
 \end{document}
