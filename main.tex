@@ -1,8 +1,8 @@
 \documentclass{article}
-
+\usepackage{textcomp}
 \usepackage{graphicx}
 \usepackage{float}
-\usepackage{multicol}
+	\usepackage{multicol}
 \usepackage{geometry}
  \geometry{
  a4paper,
@@ -66,7 +66,7 @@ Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than 
 \textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
 \\
 \\
-The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 ± 10.85 and of non-COVID-19 is 61.45 ± 15.04. In order to create the CNN, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shaffled and if the training process stayed the same, the training process stopped.
+The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 $\pm$ 10.85 and of non-COVID-19 is 61.45 $\pm$ 15.04. In order to create the CNN, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shaffled and if the training process stayed the same, the training process stopped.
 
 \begin{table}[H]
   \begin{center}
@@ -126,28 +126,24 @@ This paper has a combination of features extracted from multi-CNN and used the B
 \section{COVnet-101}
 
 \subsection{ResNet-101}
-Except from reviewing papers, we decided to create a custom network based on ResNet-101\cite{resnet}. Here will be many information about ResNet. ResNet is trained using ImageNet 2012 Dataset.\cite{imagenet} For the creation of Resnet network, two models were trained, a plain and a residual. The plain network is inspired by the philosophy of VGG networks.\cite{vgg} The convolutional layers have mostly 3x3 filters, The network ends with global averages pooling layer and 1000-way-fully-connected layer with softmax. The total number of
-weighted layers is 34. Residual Network is based on the plain network mentioned above. It adds shortcut connections which turn the network into its counterpart residual version. ////The identity
-shortcuts (Eqn.(1)) can be directly used when the input and
-output are of the same dimensions (solid line shortcuts in
-Fig. 3). When the dimensions increase (dotted line shortcuts
-in Fig. 3), we consider two options: (A) The shortcut still
-performs identity mapping, with extra zero entries padded
-for increasing dimensions. This option introduces no extra
-parameter; (B) The projection shortcut in Eqn.(2) is used to
-match dimensions (done by 1×1 convolutions). For both
-options, when the shortcuts go across feature maps of two
-sizes, they are performed with a stride of 2.////
-The network we used is a residual one with 101 layers. For the creation of ResNet-101 was used more 3-layer blocks. Is is more accurate from the plain ones. 
+For this exercise, instead of just reviewing papers, we designed our custom neural network based on the ResNet-101\cite{resnet}. In order to explain the custom network, the  ResNet-101 should be presented. \par
+    The ResNet was trained using ImageNet 2012 Dataset \cite{imagenet} and for its creation two models were trained. More specifically, these two models were a plain model and a residual model. \par
+The plain network is inspired by the philosophy of VGG networks\cite{vgg}. The filters used in the convolutional layers were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax and the total number of weighted layers is 34.\par
+The residual network is based on the plain network and the main difference is the addition of shortcut connections. These shortcuts function differently when the input and output have the same dimensions and when they do not. More accurately, when the input and output are not of the same dimensions, meaning that the dimensions are increasing, then there are two different scenarios: \par
+1. The shortcut performs identity mapping with extra zero entries padded for increasing dimensions and this option does not add any extra parameters.\par
+2. The projection shortcut is activated in order to match dimensions done by 1×1 convolutions.
+When the input and output are the same dimensions then the identity shortcuts are used on the network. \par
+    ResNet-101 was created with a residual network with 101 layers and 3-layer blocks in order to increase its accuracy.\par
+The ResNet-101 was trained using the dataset named “imagenet 2012”. This dataset has 1000 classes, the models are trained at 1.28 million images and evaluated on 50k validation images. In order to increase the number of images the ResNet-101 creators used data augmentation techniques, more specifically scale augmentation and color augmentation. The images were cropped to 224×244 from random parts either from the original image or from horizontal flipped copies from the images and they applied standard color augmentation \cite{imagenet}. To make the neural network faster and stable through normalization they used batch normalization\cite{batchnormalization} right after each convolution and before activation. \par
+ The optimizer was SGD with a mini-batch size of 256, the learning rate starts from 0.1 and is divided by 10 when the error plateaus and the models are trained for up to 60 × 104 iterations. They used a weight decay of 0.0001,  a momentum of 0.9 and dropout was not used\cite{dropout}.
 
-
- About the dataset, imagenet 2012 has 1000 classes and the models is trained at 1.28 million images and evalutated on 50k validation images. Image were cropped to 224×224 randomly sampled from an image or its horizontal flip, with the per-pixel mean subtracted. It was also used standard color augmentation.\cite{imagenet} It was also again used batch normalization\cite{batchnormalization} right after each convolution and before activation, following. The optimizer was SGD with a mini-batch size of 256.The learning rate starts from 0.1 and is divided by 10 when the error plateaus, and the models are trained for up to 60 × 104 iterations. It was 
-used a weight decay of 0.0001 and a momentum of 0.9. It was not used dropout.\cite{dropout}
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{assets/resnet-vs-vgg.png}
+\begin{center}
+\includegraphics[scale=0.75]{assets/resnet-vs-vgg.png}
   \caption{VGG vs ResNet}
   \label{fig:vggvsresnet}
+  \end{center}
 \end{figure}
 
 \subsection{Datasets}
