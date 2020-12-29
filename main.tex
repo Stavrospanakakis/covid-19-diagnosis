@@ -18,9 +18,11 @@
 \begin{document}
 	\maketitle
 
-\section{Abstract}		
+\begin{abstract}
+There will be the abstract
+\end{abstract}
 
-\section{Introduction}
+\section{Description}
 Coronavirus (COVID-19) is a newly infectious disease that has evolved into a pandemic in March 2020. Specifically, the first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in a seafood wholesale market. A number of patients initially diagnosed with a form of pneumonia, that later discovered through samples of sufferers, that originates from an unknown, till then, beta-coronavirus virus \cite{firstcases}.
 
 The most common symptoms of the virus today are fever, cough, fatigue, expectoration and shortness of breath. More rarely, sufferers experience headaches or dizziness, diarrhea, nausea and vomiting \cite{symptoms1}. Examining the samples from the sufferers, it was observed that some social groups are more likely to get infected and experience severe respiratory problems originated from the virus  [Figure: \ref{fig:CovidCasesChina}] \cite{patients}.
@@ -101,7 +103,7 @@ The first study focuses on the improvement of COVID-19 diagnosis process  and pr
 \textbf{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
 \\ 
 \\
-The second paper called “Automated detection of COVID-19 cases using deep neural networks with X-ray images” trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper were used two different datasets. The first one was called "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}. The dataset does not contain enough metadata referring to patients nevertheless, there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another information is that out of 26 patients the average age of them was 55 years. The second dataset that was used was the “ChestX-ray8 database” which was developed by Wang et al. \cite{dataset2secondreview}. This dataset contained X-ray images with healthy patients and patients with normal pneumonia however, it does not provide any metadata for the patients. The network had two different variants. The first one was able to detect whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset, only the X-rays with healthy patients  were used, to help the network to classify a patient as healthy or COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in order to get all three different results. The network used was the “DarkCovidNet” which is based on “Darknet-19” \cite{darknet}, the optimizer was Adam, cross entropy was used as a loss function and the learning rate was 3e-3. 
+The second paper called “Automated detection of COVID-19 cases using deep neural networks with X-ray images” trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper were used two different datasets. The first one was called "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}. The dataset does not contain enough metadata referring to patients nevertheless, there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another information is that out of 26 patients the average age of them was 55 years. The second dataset that was used was the “ChestX-ray8 database” which was developed by Wang et al. \cite{dataset2secondreview}. This dataset contained X-ray images with healthy patients and patients with normal pneumonia however, it does not provide any metadata for the patients. The network had two different variants. The first one was able to detect whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset, only the X-rays with healthy patients  were used, to help the network to classify a patient as healthy or COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in order to get all three different results. The network used was the “DarkCovidNet” which is based on “Darknet-19” \cite{darknet}, the optimizer was Adam, cross entropy was used as a loss function and the learning rate was 3e-3. Finally, the accuracy for binary classification was 98.08 percent and for categorical 87.02 percent.
 
 
 \begin{figure}[H]
@@ -164,8 +166,6 @@ We created two versions of the network. The one which was CovidvsNonCovid and th
 
 The Loss function which was used is Categorical Crossentropy and the Last’s layer function is Softmax because of the fact that they were 3 different labels.
 
-Here add the math and the plot of the softmax function.
-
 The total parameterss of the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176
 
 The accuracy was 91,5 percent
@@ -197,8 +197,6 @@ The accuracy was 91,5 percent
 
 The Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are 2 different labels.
 
-Here add the math and the plot of the softmax function.
-
 The total parameterss of the network are 76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.
 
 The accuracy was 97,4 percent
@@ -226,6 +224,27 @@ The accuracy was 97,4 percent
 \end{table}
 
 \section{Results}
+
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Results}
+    \label{tab:table1}
+    \begin{tabular}{||c c c c c c ||}
+      \hline 
+      \textbf{Reference} & \textbf{Problem} & \textbf{Method} & \textbf{Types of data} & \textbf{Patients / Sample size} & \textbf{Accuracy}\\ 
+      \hline
+      \cite{firstreview} & Binary Classification & ResNet-101 & Clinical & 108 patients & 99.51  \\ % <--
+      \hline
+      \cite{secondreview} & Binary Classification & DarkCovidNet & Online Datasets & 1127 images & 98.08 \\ % <--
+      \hline
+      \cite{thirdreview} & Binary Classification & Multi-CNN and Bayesnet & Online Datasets & 78 images & 97.44 \\ % <--
+      \hline
+      Custom & Binary Classification & COVnet-101 & Online Datasets & 6432 images & 97.40 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
 
 
 \section{Future Work}
