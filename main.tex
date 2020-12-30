@@ -160,7 +160,7 @@ The dataset used for healthy and pneumonia chest X-ray images is from Kaggle cre
 
 \subsection{COVID vs Healthy vs Pneumonia}
 
-In order to be able to detect if a patient suffers from COVID-19 or not, we created the “CovidvsNonCovid” network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were 3 different labels \par
+In order to be able to detect if a patient suffers from COVID-19 or pneumonia or not, we created the "CovidvsHealthyvsPneumonia" network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were three different labels \par
 The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176. The accuracy of the network was 91,5\%
 
 \begin{table}[H]
@@ -188,11 +188,8 @@ The total parameters used on the network are 76,216,707, the trainable parameter
 
 \subsection{Covid vs NonCovid}
 
-The Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are 2 different labels.
-
-The total parameterss of the network are 76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.
-
-The accuracy was 97,4 percent
+In order to be able to detect if a patient suffers from COVID-19 or not, we created the “CovidvsNonCovid” network. For the classifications where used the Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are two different labels. \par.
+The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.The accuracy of the network was 97,4 \%
 
 \begin{table}[H]
   \begin{center}
