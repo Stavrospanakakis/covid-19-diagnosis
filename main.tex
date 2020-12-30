@@ -34,12 +34,13 @@ The most common symptoms of the virus today are fever, cough, fatigue, expectora
 \end{figure}
 
 Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than DNA virus. This is the reason why  Coronaviruses are easy to adopt in different environments in order to survive and reproduce. COVID-19 is life threatening to humans because the human body has not developed immunity to the virus. Patients' data is relatively encouraging since 85\% of COVID-19 patients suffered from mild infection, 10\% from severe and only 5\% of patients suffered from critical infection. Most critical COVID-19 cases are elderly people, people suffering from other diseases and individuals who have a weak immune system \cite{medicalCOVID}. This means that  COVID-19 is able to spread and reproduce easier and faster on the respiratory system of the patients and cause COVID-19 pneumonia [Figure: \ref{fig:CovidCasesChina}].
-
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{assets/covid-vs-pneumonia-vs-normal.png}
+\centering
+\includegraphics[scale=0.2]{assets/covid-vs-pneumonia-vs-normal.png}
   \caption{Healthy person vs Normal Pneumonia vs COVID-19 Pneumonia}
   \label{fig:xraycomparison}
 \end{figure}
+
 
 
 \section{Impact of Covid-19}
@@ -47,15 +48,19 @@ Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than 
 \subsection{Cases}
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{cases/worldwide/plot.png}
+\begin{center}
+\includegraphics{cases/worldwide/plot.png}
   \caption{Covid-19 worldwide cases.}
   \label{fig:worldwidecases}
+\end{center}
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[width=\linewidth]{cases/greece/plot.png}
+\begin{center}
+\includegraphics{cases/greece/plot.png}
   \caption{Covid-19 Cases in Greece.}
   \label{fig:greececases}
+  \end{center}
 \end{figure}
 
 \subsection{Cost}
@@ -126,6 +131,7 @@ This paper has a combination of features extracted from multi-CNN and used the B
 \section{COVnet-101}
 
 \subsection{ResNet-101}
+\label{ResNet-101}
 For this exercise, instead of just reviewing papers, we designed our custom neural network based on the ResNet-101\cite{resnet}. In order to explain the custom network, the  ResNet-101 should be presented. \par
     The ResNet was trained using ImageNet 2012 Dataset \cite{imagenet} and for its creation two models were trained. More specifically, these two models were a plain model and a residual model. \par
 The plain network is inspired by the philosophy of VGG networks\cite{vgg}. The filters used in the convolutional layers were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax and the total number of weighted layers is 34.\par
@@ -146,25 +152,16 @@ The ResNet-101 was trained using the dataset named “imagenet 2012”. This dat
   \end{center}
 \end{figure}
 
-\subsection{Datasets}
-The dataset used for healthy and pneumonia chest x-ray images is from Kaggle created by Paul Mooney.\cite{dataset1custom}. It contains 5,863 images. The datasets used for COVID-19 are 
-The datasets which used were "A COVID-19 X-ray image database" which was developed by Cohen JP\cite{dataset1secondreview} and "COVID-19 Chest X-ray Dataset Initiative"\cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative"\cite{datasetcustomcovid}. The total images are 6432. The 80 percent of the data used for train and the 20 percent for validation. 
-
-\subsection{Image proccesing}
-The image proccesing of the images is to resize them to 128x128, Shuffle them and normalize them by dividing with 255. 
-
-\subsection{Paramaters}
-The input shape of the network is (5144, 128, 128 3), the dataset shuffled after every epoch, the batch size is 16, the optimizer is Adam and the learning rate is 0.01. 
-
-We created two versions of the network. The one which was CovidvsNonCovid and the other was CovidvsHealthyvsPneumonia.
+\subsection{COVnet-101 network}
+COVnet-101, as mentioned in Section \ref{ResNet-101}, was based on ResNet-101. The method used is called “Transfer learning” meaning that ResNet-101 was used as a starting point to create COVnet-101. \par
+The images used in COVnet-101  were re-sized to 128x128, then they were shuffled and normalized by dividing with 255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam and the learning rate is 0.01. \par
+There are two different versions of the network. The first one is called “CovidvsNonCovid” and it detects COVID-19 on patients from X-ray images. This implies that non COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “CovidvsHealthyvsPneumonia” and it detects COVID-19 and/or pneumonia from X-ray images. This version of the network is an improved version of CovidvsNonCovid since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called CovidvsHealthyvsPneumonia can detect more than one malady from an image. \par 
+The dataset used for healthy and pneumonia chest X-ray images is from Kaggle created by Paul Mooney \cite{dataset1custom} and it contains 5,863 images. The datasets for COVID-19 detection were "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}, "COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid}.  The total images are 6432 and the division to  trained / validation images percentage was 80\% / 20\%. 
 
 \subsection{COVID vs Healthy vs Pneumonia}
 
-The Loss function which was used is Categorical Crossentropy and the Last’s layer function is Softmax because of the fact that they were 3 different labels.
-
-The total parameterss of the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176
-
-The accuracy was 91,5 percent
+In order to be able to detect if a patient suffers from COVID-19 or not, we created the “CovidvsNonCovid” network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were 3 different labels \par
+The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176. The accuracy of the network was 91,5\%
 
 \begin{table}[H]
   \begin{center}
@@ -228,7 +225,7 @@ The accuracy was 97,4 percent
     \label{tab:table1}
     \begin{tabular}{||c c c c c c ||}
       \hline 
-      \textbf{Reference} & \textbf{Problem} & \textbf{Method} & \textbf{Types of data} & \textbf{Patients / Sample size} & \textbf{Accuracy}\\ 
+      \textbf{Reference} & \textbf{Problem} & \textbf{Method} & \textbf{Types of data} & \textbf{Sample size} & \textbf{Accuracy}\\ 
       \hline
       \cite{firstreview} & Binary Classification & ResNet-101 & Clinical & 108 patients & 99.51  \\ % <--
       \hline
