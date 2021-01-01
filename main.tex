@@ -214,7 +214,7 @@ The total parameters used on the network are76,214,657, the trainable parameters
 \end{table}
 
 \section{Results}
-
+The majority of papers focused on the creation of multiple networks. For instance, one for binary and one for categorical classification. However, the most accurate ones were these with binary classification ( COVID-19 vs Non-COVID-19 ). First of all, the first paper\cite{firstreview}, after training 10 Convolutional Neural Networks came to the conclusion that ResNet-101\cite{resnet} had the best accuracy among the rest of the networks and the papers with an really minimal clinical dataset with complete metadata. Nonetheless, the other papers, despite the fact of their decent accuracy, their datasets did not have complete metadata and they used online datasets from the internet. Except from the first paper\cite{firstreview}, the third one \cite{thirdreview}, had a high accuracy with an even more minimal dataset than the first one.\cite{firstreview} It was quite interesting because its method was a bit different than the others. 	Specifically, it extracted features from multiple Convolutional Neural Networks and used a Bayesnet classifier while the others used only exclusively pre-trained networks or transfer learning. Finally, our custom network, CovNet-101, and the second paper's network\cite{secondreview}, DarkCovidNet, had very close accuracy to the previous ones but their datasets had a bigger ammount of images.
 
 \begin{table}[H]
   \begin{center}
