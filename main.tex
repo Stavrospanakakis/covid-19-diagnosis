@@ -169,7 +169,20 @@ The images\cite{dataset1secondreview} \cite{dataset2fourthreview} scaled down to
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{assets/fourth_review.png}
   \caption{Workflow of proposed COVIDX-Net framework for classifying the COVID-19 status in X-Ray images.}
-  \label{fig:paper3architecture}
+  \label{fig:paper4}
+\end{figure}
+
+\subsection{Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection}
+
+\cite{fifth_paper}
+
+The fifth paper called “Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection” focuses on the categorization of X-ray images as viral pneumonia (normal pneumonia), non viral pneumonia and healthy. They propose a new model called “CAAD” from the acronyms Confidence-Aware Anomaly Detection. The model contains a feature extractor and a confidence prediction module in order to be able to detect anomalies on images where the confidence score is low, or the anomaly score is high, the images are considered to contain an anomaly. The major advantage of paper is the fact that they treat all viral pneumonia cases as anomalies to maximize the accuracy. The model used six stages of layer-by-layer convolution operations and each X-ray image is processed by MBConv blocks, and later they are transformed into a d-dimensional feature  vector by a global average pooling layer. The datasets used were the X-VIRAL dataset  with 5.977 viral pneumonia cases and 37.393 non-viral pneumonia or healthy cases and the X-COVID dataset\cite{dataset1secondreview} that contains 106 COVID-19 cases and 107 healthy cases. The highest accuracy was achieved was 80.65 percent with the EfficientNet-B0\cite{efficientnet} network
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/fifth_paper.png}
+  \caption{Diagram of the proposed CAAD model. This model is composed of an anomaly detection module and a confidence prediction module,
+which are designed to predict the anomaly score and confidence score of each input, respectively..}
+  \label{fig:paper5}
 \end{figure}
 
 \section{COVnet-101}
@@ -446,5 +459,15 @@ C. Szegedy et al.
 Computer Vision".}.
 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
 2016, pp. 2818-2826.
+
+\bibitem{fifth_paper}
+Zhang, Jianpeng, et al. 
+\textit{"Covid-19 screening on chest x-ray images using deep learning based anomaly detection."}.
+arXiv preprint arXiv:2003.12338 (2020).
+
+\bibitem{efficientnet}
+M. Tan and Q. Le
+\textit{“Efficientnet: Rethinking model scaling for convolutional neural networks.”}
+International Conference on Machine Learning, 2019, pp. 6105–6114.
 \end{thebibliography}
 \end{document}
