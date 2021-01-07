@@ -159,6 +159,18 @@ This paper has a combination of features extracted from multi-CNN and used the B
   \label{fig:paper3architecture}
 \end{figure}
 
+\subsection{COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray Image}
+
+\cite{fourth_review}
+
+The paper called "COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray Image" used transfer learning methods of seven different architectures in order to propose a new network called “COVIDX-NET”. The seven different networks are: VGG19\cite{vgg}, DenseNet201\cite{densenet}, InceptionV3\cite{inception}, ResNetV2\cite{resnet}, InceptionResNetV2\cite{inception}, Xception\cite{xception}, and MobileNetV2\cite{mobilenet} and the network is able to detect COVID-19 from 2-dimensional X-ray images. 
+The images\cite{dataset1secondreview} \cite{dataset2fourthreview} scaled down to a fixed size of 244x244 and hoe encoding is allied on the labels to classify the images  as COVID-19 positive or negative. The dataset is split to 80 percent trained and 20 percent validation data. Later a random sample of training images is selected to be applied to the deep learning classifier and then evaluation metrics are applied to record the set’s performance.  At the end, the data are tested on the tuned deep learning classifier in order to classify the X-ray as COVID-19 positive or negative. The dataset contains 50 Chest X-ray images and half of them (25) are positive cases and the highest accuracy was 90 percent from the VGG19 and DenseNet201 models.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/fourth_review.png}
+  \caption{Workflow of proposed COVIDX-Net framework for classifying the COVID-19 status in X-Ray images.}
+  \label{fig:paper3architecture}
+\end{figure}
 
 \section{COVnet-101}
 
@@ -412,5 +424,27 @@ Akhtaruzzaman, Md, Sabri Boubaker, and Ahmet Sensoy
 \textit{"Financial contagion during COVID–19 crisis."}.
 Finance Research Letters (2020): 101604.
 
+\bibitem{fourth_review}
+Hemdan, Ezz El-Din, Marwa A. Shouman, and Mohamed Esmail Karar. 
+\textit{"Covidx-net: A framework of deep learning classifiers to diagnose covid-19 in x-ray images."}
+arXiv preprint arXiv:2003.11055 (2020).
+
+\bibitem{dataset2fourthreview}
+Pyimagesearch
+\textit{Medical dataset}
+Available from https://www.pyimagesearch.com/category/medical/
+
+\bibitem{densenet}
+G. Huang et al. 
+\textit{"Densely connected convolutional
+networks," in Proceedings - 30th IEEE Conference on Computer Vision and Pattern Recognition.}.
+CVPR 2017 vol. 2017-January, ed: Institute of Electrical and Electronics Engineers Inc., 2017, pp. 2261-2269.
+
+\bibitem{inception}
+C. Szegedy et al.
+\textit{"Rethinking the Inception Architecture for
+Computer Vision".}.
+2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
+2016, pp. 2818-2826.
 \end{thebibliography}
 \end{document}
