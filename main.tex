@@ -36,7 +36,8 @@ Ionian University\\ Department of Informatics
 \end{center}
 \pagebreak
 
-
+\tableofcontents
+\pagebreak
 \begin{abstract}
 There will be the abstract
 \end{abstract}
@@ -98,9 +99,8 @@ Nowadays, thanks to technological advancement, the living standard has been sign
     These applications could greatly benefit detection of COVID-19 since this virus is highly contagious among patients and physicians. This means that the physicians have to work in high workload conditions and interact with patients. Under these conditions the diagnosis should become faster and even better, in certain cases could be done remotely. The applications need just an X-ray of the patients' chest to determine if they suffer from COVID-19. In this view, the physicians and computer scientists need large amounts of X-ray images in order to trim models with high accuracy to make the diagnosis of COVID-19 a fast and secure process.
 
 
-\section{Review}
-\textbf{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
-\\
+\section{Review} 
+\subsection{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
 \\
 The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 $\pm$ 10.85 and of non-COVID-19 is 61.45 $\pm$ 15.04. In order to create the CNN, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shaffled and if the training process stayed the same, the training process stopped.
 
@@ -136,8 +136,7 @@ The first study focuses on the improvement of COVID-19 diagnosis process  and pr
   \end{center}
 \end{table}
 
-\textbf{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
-\\ 
+\subsection{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
 \\
 The second paper called “Automated detection of COVID-19 cases using deep neural networks with X-ray images” trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper were used two different datasets. The first one was called "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}. The dataset does not contain enough metadata referring to patients nevertheless, there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another information is that out of 26 patients the average age of them was 55 years. The second dataset that was used was the “ChestX-ray8 database” which was developed by Wang et al. \cite{dataset2secondreview}. This dataset contained X-ray images with healthy patients and patients with normal pneumonia however, it does not provide any metadata for the patients. The network had two different variants. The first one was able to detect whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset, only the X-rays with healthy patients  were used, to help the network to classify a patient as healthy or COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in order to get all three different results. The network used was the “DarkCovidNet” which is based on “Darknet-19” \cite{darknet}, the optimizer was Adam, cross entropy was used as a loss function and the learning rate was 3e-3. Finally, the accuracy for binary classification was 98.08 percent and for categorical 87.02 percent.
 
@@ -148,9 +147,9 @@ The second paper called “Automated detection of COVID-19 cases using deep neur
   \label{fig:paper3architecture}
 \end{figure}
 
-\textbf{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier}\cite{thirdreview}
-
-This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception}, Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID-19 categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID-19 images(bacterial, varial pneumonia) and had 91.16 percent accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID-19 images and had 97.44 percent accuracy. 
+\subsection{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier}\cite{thirdreview}
+\\
+This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception}, Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID images(bacterial, varial pneumonia) and had 91.16 percent accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID images and had 97.44 percent accuracy. 
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png}
