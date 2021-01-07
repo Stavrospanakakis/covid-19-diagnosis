@@ -11,7 +11,7 @@
  top=20mm,
  }
 
-%\title{Covid-19 study with Neural Networks}
+%\title{Convolutional Neural Networks for the detection of COVID-19}
 %\author{Stavros Panakakis 2018108,}
 %\author{Sophia Tsivoula 2018130}
 
@@ -19,7 +19,7 @@
 
 \begin{document}
 \begin{center}
-{\LARGE Covid-19 study with Neural Networks}\\
+{\LARGE Convolutional Neural Networks for the detection of COVID-19}\\
 \vspace{0.8cm}
 {\large Stavros Panakakis 2018108, \\ Sophia Tsivoula 2018130}
 \vspace{5cm}
@@ -62,7 +62,7 @@ Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than 
 
 
 
-\section{Impact of Covid-19}
+\section{Impact of COVID-19}
 
 
 
@@ -71,7 +71,7 @@ Although the first sign of COVID-19 was found in December 2019 there are more th
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{cases/worldwide/plot.png}
-  \caption{Covid-19 worldwide cases.}
+  \caption{COVID-19 worldwide cases.}
   \label{fig:worldwidecases}
 \end{center}
 \end{figure}
@@ -81,7 +81,7 @@ In Greece there have been reported more than 133 thousand cases and the death ra
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{cases/greece/plot.png}
-  \caption{Covid-19 Cases in Greece.}
+  \caption{COVID-19 Cases in Greece.}
   \label{fig:greececases}
   \end{center}
 \end{figure}
@@ -150,7 +150,7 @@ The second paper called “Automated detection of COVID-19 cases using deep neur
 
 \textbf{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier}\cite{thirdreview}
 
-This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception}, Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID images(bacterial, varial pneumonia) and had 91.16 percent accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID images and had 97.44 percent accuracy. 
+This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception}, Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID-19 categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID-19 images(bacterial, varial pneumonia) and had 91.16 percent accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID-19 images and had 97.44 percent accuracy. 
 
 \begin{figure}[H]
 \includegraphics[width=\linewidth]{assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png}
@@ -186,17 +186,17 @@ The ResNet-101 was trained using the dataset named “imagenet 2012”. This dat
 \subsection{COVnet-101 network}
 COVnet-101, as mentioned in Section \ref{ResNet-101}, was based on ResNet-101. The method used is called “Transfer learning” meaning that ResNet-101 was used as a starting point to create COVnet-101. \par
 The images used in COVnet-101  were re-sized to 128x128, then they were shuffled and normalized by dividing with 255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam and the learning rate is 0.01. \par
-There are two different versions of the network. The first one is called “CovidvsNonCovid” and it detects COVID-19 on patients from X-ray images. This implies that non COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “CovidvsHealthyvsPneumonia” and it detects COVID-19 and/or pneumonia from X-ray images. This version of the network is an improved version of CovidvsNonCovid since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called CovidvsHealthyvsPneumonia can detect more than one malady from an image. \par 
+There are two different versions of the network. The first one is called “COVID-19 vs Non-COVID-19” and it detects COVID-19 on patients from X-ray images. This implies that non COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “COVID-19 vs Healthy vs Pneumonia” and it detects COVID-19 and/or pneumonia from X-ray images. This version of the network is an improved version of COVID-19 vs Non-COVID-19 since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called COVID-19 vs Healthy vs Pneumonia can detect more than one malady from an image. \par 
 The dataset used for healthy and pneumonia chest X-ray images is from Kaggle created by Paul Mooney \cite{dataset1custom} and it contains 5,863 images. The datasets for COVID-19 detection were "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}, "COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid}.  The total images are 6432 and the division to  trained / validation images percentage was 80\% / 20\%. 
 
-\subsection{COVID vs Healthy vs Pneumonia}
+\subsection{COVID-19 vs Healthy vs Pneumonia}
 
-In order to be able to detect if a patient suffers from COVID-19 or pneumonia or not, we created the "CovidvsHealthyvsPneumonia" network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were three different labels \par
+In order to be able to detect if a patient suffers from COVID-19 or pneumonia or not, we created the "COVID-19 vs Healthy vs Pneumonia" network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were three different labels \par
 The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176. The accuracy of the network was 91,5\%
 
 \begin{table}[H]
   \begin{center}
-    \caption{Covid vs healthy vs pneumonia}
+    \caption{COVID-19 vs Healthy vs Pneumonia}
     \label{tab:table3}
     \begin{tabular}{||c c c ||}
 	  \hline
@@ -217,14 +217,14 @@ The total parameters used on the network are 76,216,707, the trainable parameter
 \end{table}
 
 
-\subsection{Covid vs NonCovid}
+\subsection{COVID-19 vs Non-COVID-19}
 
-In order to be able to detect if a patient suffers from COVID-19 or not, we created the “CovidvsNonCovid” network. For the classifications where used the Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are two different labels. \par.
+In order to be able to detect if a patient suffers from COVID-19 or not, we created the "COVID-19 vs Non-COVID-19" network. For the classifications where used the Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are two different labels. \par.
 The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.The accuracy of the network was 97,4 \%
 
 \begin{table}[H]
   \begin{center}
-    \caption{Covid vs Non-Covid}
+    \caption{COVID-19 vs Non-COVID-19}
     \label{tab:table3}
     \begin{tabular}{||c c c ||}
 	  \hline
@@ -268,7 +268,7 @@ The majority of papers focused on the creation of multiple networks. For instanc
 \end{table}
 
 \section{Future Work}
-In the future we would like to focus mainly on the networks’ optimization. We would like to increase their accuracy and make them run faster. Another option would be the creation of an informative system. The informative system could contain a mobile app which could scan Chest x-rays  and could classify them as either COVID-19 positive or COVID-19 negative in the case that the CovidvsNonCovid network was used or could classify them as  COVID-19 positive or pneumonia positive or as healthy  in the case that the CovidvsHealthyvsPneumonia networkwas used and send them to a cloud server with their appropriate information (Disease, Patient ID, Age, Gender). The new X-rays could help the continuous training of the COVnet-101and make it more accurate. At the end of the day a huge dataset could be created in order to help more scientists create their custom networks.
+In the future we would like to focus mainly on the networks’ optimization. We would like to increase their accuracy and make them run faster. Another option would be the creation of an informative system. The informative system could contain a mobile app which could scan Chest x-rays  and could classify them as either COVID-19 positive or COVID-19 negative in the case that the COVID-19 vs Non-COVID-19 network was used or could classify them as COVID-19 positive or pneumonia positive or as healthy  in the case that the COVID-19 vs Healthy vs Pneumonia network was used and send them to a cloud server with their appropriate information (Disease, Patient ID, Age, Gender). The new X-rays could help the continuous training of the COVnet-101and make it more accurate. At the end of the day a huge dataset could be created in order to help more scientists create their custom networks.
  
 
 \begin{thebibliography}{9}
