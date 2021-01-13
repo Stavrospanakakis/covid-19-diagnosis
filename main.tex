@@ -66,7 +66,7 @@ Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than 
 \section{Impact of COVID-19}
 
 \subsection{Cases}
-Although the first sign of COVID-19 was found in December 2019 there are more than 85 million cases of COVID-19 worldwide. More than 60 million patients recovered and the death rate, up to this date, is approximately 2.17\%. Up to this day most cases are reported in the United States of America with 21 million cases, India with 10 million cases and Brazil with more than 7 million cases. 
+Although the first sign of COVID-19 was found in December 2019 there are more than 90 million cases of COVID-19 worldwide [Figure: \ref{fig:worldwidecases}]. More than 50 million patients recovered and the death rate is approximately 2\%. Up to this day, most cases are reported in the United States of America with 23 million cases, India with 10 million cases and Brazil with more than 8 million cases. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.8]{cases/worldwide/plot.png}
@@ -74,8 +74,8 @@ Although the first sign of COVID-19 was found in December 2019 there are more th
   \label{fig:worldwidecases}
 \end{center}
 \end{figure}
-In europe more than 24.8 million cases have been reported and the death rate in Europe is approximately 2.2\%. European countries with the most cases are Russia with more than 3 million cases, France with 2.5 million cases and the United Kingdom with 2.3 million cases.\par
-In Greece there have been reported more than 133 thousand cases and the death rate is 3.3\%. More than 23 thousand people have been recovered. 
+In Europe more than 26 million cases have been reported and the death rate is approximately 2\%. European countries with the most cases are Russia with more than 3 million cases, France with 2.5 million cases and the United Kingdom with 2.6 million cases.\par
+In Greece there have been reported more than 146 thousand cases [Figure: \ref{fig:greececases}] and the death rate is higher than the world average at 3.65\%. More than 93.7 thousand people have been recovered \cite{cases}.
 
 \begin{figure}[H]
 \begin{center}
@@ -88,17 +88,17 @@ In Greece there have been reported more than 133 thousand cases and the death ra
 \subsection{Cost}
 
 \subsubsection{Social cost}
-COVID-19 changed people's lives on a social level during the pandemic. People had to stay inside to prevent spending the virus and had to change their lifestyle and their habits. The pandemic affected people differently on a global level. Citizens had to be quarantined in their houses  and a large number of citizens either be unemployed or work from home. More and more people had to transfer their businesses on the web, in order to survive and most of the work needed to be done via a computer. Children from all different age groups had attended online classes and most social events and conferences were held on online platforms. \par
-Another huge social impact of COVID-19 was the prioritization of admissions in medical centers. Hospitals were filled with patients and in extreme cases (Italy, Spain) doctors had to prioritize patients from the seriousness of their condition. There was a lack of medical equipment in some cases and also hospitals and medical centers could cure only patients with severe conditions. Another impact of the COVID-19 pandemic on a personal level is that  people had to constantly wear face masks and sanitize regularly but also avoid unnecessary human contact in order to prevent spreading the virus \cite{symptoms2}.
+COVID-19 changed people's lives on a social level during the pandemic. People had to stay inside to prevent spending the virus and had to change their lifestyle and their habits. The pandemic affected people differently on a global level. Citizens had to be quarantined in their houses  and a large number of them either be unemployed or work from home. More and more people had to transfer their businesses on the web, in order to survive and most of the work needed to be done via a computer. Children from all different age groups attended online classes and most social events and conferences were held on online platforms. \par
+Another social impact of COVID-19 was the prioritization of admissions in medical centers. Hospitals were filled with patients and in extreme cases (Italy, Spain) doctors had to prioritize patients from the seriousness of their condition. There was a lack of medical equipment in some cases and also hospitals and medical centers could cure only patients with severe conditions. On a personal level people had to constantly wear face masks and sanitize regularly but also avoid unnecessary human contact in order to prevent spreading the virus \cite{symptoms2}.
 \subsubsection{Financial cost}
     
-COVID-19 affected the world economy. Many countries such as the United Kingdom and Japan had to deal with a severe drop in their main index higher than 20\% and other countries with big technological companies, were benefited by the pandemic. More specifically, the IMF (International Monetary Fund) estimated that government stimulus packages during the pandemic amounted to 3.3 trillion \$ , and additional loans amounted to 4.5 trillion \$. In many countries, central banks 	\cite{financial_cost}. 
+COVID-19 affected the world economy. Many countries such as the United Kingdom and Japan had to deal with a severe drop in their main index higher than 20\% and other countries with big technological companies, were benefited by the pandemic. More specifically, the IMF (International Monetary Fund) estimated that government stimulus packages during the pandemic amounted to 3.3 trillion \$ and additional loans amounted to 4.5 trillion \$. In many countries, central banks have reduced policy interest rate in order to urge borrowers to take out more loans to benefit them financially \cite{financial_cost}. 
 
 
 \section{Need for analytics}
-Nowadays, thanks to technological advancement, the living standard has been significantly increased. One the medical field, the necessary time to diagnose an illness has drastically decreased thanks to modern techniques and the help of computer scientists. More specifically, new applications with artificial intelligent techniques coupled with radiological imaging can help physicians detect diseases on patients faster and accurately. Another benefit is that these applications can be used especially in remote areas where there is a lack of specialized physicians. The physicians could use these applications to maximize the mean time that takes to diagnose a patient. \par
+Nowadays, thanks to technological advancement, the living standard has been significantly increased. On the medical field, the necessary time to diagnose an illness has drastically decreased thanks to modern techniques and the help of computer scientists. More specifically, new applications with artificial intelligent techniques coupled with radiological imaging can help physicians detect diseases on patients faster and accurately. Another benefit is that these applications can be used especially in remote areas where there is a lack of specialized physicians. The physicians could use these applications to maximize the mean time that takes to diagnose a patient. \par
 
-    These applications could greatly benefit detection of COVID-19 since this virus is highly contagious among patients and physicians. This means that the physicians have to work in high workload conditions and interact with patients. Under these conditions the diagnosis should become faster and even better, in certain cases could be done remotely. The applications need just an X-ray of the patients' chest to determine if they suffer from COVID-19. In this view, the physicians and computer scientists need large amounts of X-ray images in order to trim models with high accuracy to make the diagnosis of COVID-19 a fast and secure process.
+    These applications could greatly benefit detection of COVID-19 since this virus is highly contagious among patients and physicians. This means that the physicians have to work in high workload conditions and interact with patients. Under these conditions the diagnosis should become faster and in certain cases, as in remote areas, could be done remotely. The applications need just a chest X-ray of the patients' chest to determine if they suffer from COVID-19 or not. In this view, the physicians and computer scientists need large amounts of X-ray images in order to trim models with high accuracy to make the diagnosis of COVID-19 a fast and secure process.
 
 
 \section{Review} 
@@ -189,44 +189,43 @@ which are designed to predict the anomaly score and confidence score of each inp
 
 \subsection{ResNet-101}
 \label{ResNet-101}
-For this exercise, instead of just reviewing papers, we designed our custom neural network based on the ResNet-101\cite{resnet}. In order to explain the custom network, the  ResNet-101 should be presented. \par
-    The ResNet was trained using ImageNet 2012 Dataset \cite{imagenet} and for its creation two models were trained. More specifically, these two models were a plain model and a residual model. \par
-The plain network is inspired by the philosophy of VGG networks\cite{vgg}. The filters used in the convolutional layers were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax and the total number of weighted layers is 34.\par
+For this exercise, instead of just reviewing papers, a custom neural network was developed based on the ResNet-101\cite{resnet}. In order to explain the custom network, the  ResNet should be presented. For its creation two networks were trained. More specifically, these two networks were a plain and a residual network. \par
+The plain network is inspired by the philosophy of VGG networks\cite{vgg} [Figure: \ref{fig:vggvsresnet}]. The filters used in the convolutional layers were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax and the total number of weighted layers is 34.\par
 The residual network is based on the plain network and the main difference is the addition of shortcut connections. These shortcuts function differently when the input and output have the same dimensions and when they do not. More accurately, when the input and output are not of the same dimensions, meaning that the dimensions are increasing, then there are two different scenarios: \par
 1. The shortcut performs identity mapping with extra zero entries padded for increasing dimensions and this option does not add any extra parameters.\par
 2. The projection shortcut is activated in order to match dimensions done by 1×1 convolutions.
 When the input and output are the same dimensions then the identity shortcuts are used on the network. \par
     ResNet-101 was created with a residual network with 101 layers and 3-layer blocks in order to increase its accuracy.\par
-The ResNet-101 was trained using the dataset named “imagenet 2012”. This dataset has 1000 classes, the models are trained at 1.28 million images and evaluated on 50k validation images. In order to increase the number of images the ResNet-101 creators used data augmentation techniques, more specifically scale augmentation and color augmentation. The images were cropped to 224×244 from random parts either from the original image or from horizontal flipped copies from the images and they applied standard color augmentation \cite{imagenet}. To make the neural network faster and stable through normalization they used batch normalization\cite{batchnormalization} right after each convolution and before activation. \par
+The ResNet-101 was trained using the dataset named “Imagenet 2012”\cite{imagenet}. This dataset has 1000 classes, the models are trained at 1.28 million images and evaluated on 50k validation images. In order to increase the number of images the ResNet-101 creators used data augmentation techniques, more specifically scale augmentation and color augmentation. The images were cropped to 224×244 from random parts either from the original image or from horizontal flipped copies from the images and they applied standard color augmentation \cite{imagenet}. To make the neural network faster and stable through normalization they used batch normalization\cite{batchnormalization} right after each convolution and before activation. \par
  The optimizer was SGD with a mini-batch size of 256, the learning rate starts from 0.1 and is divided by 10 when the error plateaus and the models are trained for up to 60 × 104 iterations. They used a weight decay of 0.0001,  a momentum of 0.9 and dropout was not used\cite{dropout}.
 
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.5]{assets/resnet-vs-vgg.png}
+\includegraphics[scale=0.7]{assets/resnet-vs-vgg.png}
   \caption{VGG vs ResNet}
   \label{fig:vggvsresnet}
   \end{center}
 \end{figure}
 
 \subsection{COVnet-101 network}
-COVnet-101, as mentioned in Section \ref{ResNet-101}, was based on ResNet-101. The method used is called “Transfer learning” meaning that ResNet-101 was used as a starting point to create COVnet-101. \par
-The images used in COVnet-101  were re-sized to 128x128, then they were shuffled and normalized by dividing with 255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam and the learning rate is 0.01. \par
-There are two different versions of the network. The first one is called “COVID-19 vs Non-COVID-19” and it detects COVID-19 on patients from X-ray images. This implies that non COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “COVID-19 vs Healthy vs Pneumonia” and it detects COVID-19 and/or pneumonia from X-ray images. This version of the network is an improved version of COVID-19 vs Non-COVID-19 since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called COVID-19 vs Healthy vs Pneumonia can detect more than one malady from an image. \par 
+COVnet-101, as mentioned in Section \ref{ResNet-101}, was based on ResNet-101. The method used is called “Transfer learning” meaning that ResNet-101 was used as a starting point to develop COVnet-101. \par
+The images used in COVnet-101  were re-sized to 128x128, then they were shuffled and normalized by dividing with 255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam, the learning rate is 0.01 and the number of epochs is equal to 10. \par
+There are two different versions of the network. The first one is called “COVID-19 vs Non-COVID-19” and it detects COVID-19 on patients from X-ray images. This implies that non-COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “COVID-19 vs Healthy vs Pneumonia” and it detects COVID-19, pneumonia and/or healthy patients from chest X-ray images. This version of the network is an improved version of "COVID-19 vs Non-COVID-19" since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called "COVID-19 vs Healthy vs Pneumonia" can detect more than one malady from an image. \par 
 The dataset used for healthy and pneumonia chest X-ray images is from Kaggle created by Paul Mooney \cite{dataset1custom} and it contains 5,863 images. The datasets for COVID-19 detection were "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}, "COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid}.  The total images are 6432 and the division to  trained / validation images percentage was 80\% / 20\%. 
 
 \subsection{COVID-19 vs Healthy vs Pneumonia}
 
-In order to be able to detect if a patient suffers from COVID-19 or pneumonia or not, we created the "COVID-19 vs Healthy vs Pneumonia" network. For the classifications where used the Loss function which was used is Categorical Cross Entropy and the last’s layer function is Softmax because there were three different labels \par
-The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176. The accuracy of the network was 91,5\%
+In order to be able to detect if a patient suffers from COVID-19 or suffers from pneumonia or does not suffer from neither diseases, we created the "COVID-19 vs Healthy vs Pneumonia" network. For the classifications were used the Loss function which was used is Categorical Crossentropy and the last’s layer function is Softmax because there were three different labels (COVID-19, Healthy, Pneumonia). \par
+The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176 [Table \ref{tab:table2}]. The accuracy of the network was 91,5\%
 
 \begin{table}[H]
   \begin{center}
     \caption{COVID-19 vs Healthy vs Pneumonia}
-    \label{tab:table3}
+    \label{tab:table2}
     \begin{tabular}{||c c c ||}
 	  \hline
-      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Param}  \\  % <--
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Parameters}  \\  % <--
       \hline
       resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
       \hline
@@ -245,8 +244,8 @@ The total parameters used on the network are 76,216,707, the trainable parameter
 
 \subsection{COVID-19 vs Non-COVID-19}
 
-In order to be able to detect if a patient suffers from COVID-19 or not, we created the "COVID-19 vs Non-COVID-19" network. For the classifications where used the Loss function below is Binary Crossentropy and the Last’s layer function is Sigmoid because of the fact that they are two different labels. \par.
-The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176.The accuracy of the network was 97,4 \%
+In order to be able to detect if a patient suffers from COVID-19 or not, we created the "COVID-19 vs Non-COVID-19" network. More specifically, the Loss function is Binary Crossentropy and the last’s layer function is Sigmoid because there are just two different labels on the model (COVID-19, Non-COVID-19). \par
+The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176 [Table: \ref{tab:table3}].The accuracy of the network was 97,4 \%
 
 \begin{table}[H]
   \begin{center}
@@ -254,7 +253,7 @@ The total parameters used on the network are76,214,657, the trainable parameters
     \label{tab:table3}
     \begin{tabular}{||c c c ||}
 	  \hline
-      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Param}  \\  % <--
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Parameters}  \\  % <--
       \hline
       resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
       \hline
@@ -473,5 +472,10 @@ arXiv preprint arXiv:2003.12338 (2020).
 M. Tan and Q. Le
 \textit{“Efficientnet: Rethinking model scaling for convolutional neural networks.”}
 International Conference on Machine Learning, 2019, pp. 6105–6114.
+
+\bibitem{cases}
+EU Open Data Portal
+\textit{COVID-19 Coronavirus data.}
+Avaliable from: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data
 \end{thebibliography}
 \end{document}
