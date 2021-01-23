@@ -1,0 +1,1135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Convolutional Neural Networks for the detection of COVID-19</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<meta name="originator" content="TeX4ht (https://tug.org/tex4ht/)"> 
+<!-- html --> 
+<meta name="src" content="main.tex"> 
+<link rel="stylesheet" type="text/css" href="main.css"> 
+<link rel="stylesheet" href="https://latex.now.sh/style.min.css" />
+</head><body 
+>
+<header>
+   <p>Disclaimer: It is not a scientific paper, just a university assignment. 
+      More info <a href="https://github.com/Stavrospanakakis/covid-19-diagnosis">here</a>
+   </p>
+</header>
+<div class="center" 
+>
+<!--l. 21--><p class="noindent" >
+<!--l. 22--><p class="noindent" ><h1 
+class="cmr-17">Convolutional Neural Networks for the detection of COVID-19</h1><br />
+<span
+class="cmr-12">Stavros Panakakis 2018108,</span><br />
+<span 
+class="cmr-12">Sophia Tsivoula 2018130 </span><hr class="figure"><div class="figure" 
+>
+<div class="center" 
+>
+<!--l. 27--><p class="noindent" >
+<!--l. 29--><p class="noindent" ><img 
+src="./assets/Ionian-University-Logo.png" alt="PIC"  
+style="width: 100%; margin:0 auto;" ><br />
+Ionian University<br />
+Department of Informatics</div>
+</div><hr class="endfigure">
+<!--l. 35--><p class="noindent" ><span 
+class="cmr-12">Corfu 2020-2021</span></div>
+
+   <h3 class="likesectionHead"><a 
+ id="x1-1000"></a>Contents</h3>
+   <div class="tableofcontents">
+   <span class="sectionToc" >1 <a 
+href="#x1-20001" id="QQ2-1-2">Description</a></span>
+<br />   <span class="sectionToc" >2 <a 
+href="#x1-30002" id="QQ2-1-5">Impact of COVID-19</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >2.1 <a 
+href="#x1-40002.1" id="QQ2-1-6">Cases</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >2.2 <a 
+href="#x1-50002.2" id="QQ2-1-9">Cost</a></span>
+<br />   <span class="sectionToc" >3 <a 
+href="#x1-80003" id="QQ2-1-12">Need for analytics</a></span>
+<br />   <span class="sectionToc" >4 <a 
+href="#x1-90004" id="QQ2-1-13">Review</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >4.1 <a 
+href="#x1-100004.1" id="QQ2-1-14">Application of deep learning technique to manage COVID-19 in routine
+clinical practice using CT images: Results of 10 convolutional neural networks</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >4.2 <a 
+href="#x1-110004.2" id="QQ2-1-16">Automated detection of COVID-19 cases using deep neural networks
+with X-ray images</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >4.3 <a 
+href="#x1-120004.3" id="QQ2-1-18">Computer-aided detection of COVID-19 from X-ray images using
+multi-CNN and Bayesnet classifier</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >4.4 <a 
+href="#x1-130004.4" id="QQ2-1-20">COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose
+COVID-19 in X-Ray Image</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >4.5 <a 
+href="#x1-140004.5" id="QQ2-1-22">Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware
+Anomaly Detection</a></span>
+<br />   <span class="sectionToc" >5 <a 
+href="#x1-150005" id="QQ2-1-24">COVnet-101</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >5.1 <a 
+href="#x1-160005.1" id="QQ2-1-25">ResNet-101</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >5.2 <a 
+href="#x1-170005.2" id="QQ2-1-27">COVnet-101 network</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >5.3 <a 
+href="#x1-180005.3" id="QQ2-1-28">COVID-19 vs Healthy vs Pneumonia</a></span>
+<br />   &#x00A0;<span class="subsectionToc" >5.4 <a 
+href="#x1-190005.4" id="QQ2-1-30">COVID-19 vs Non-COVID-19</a></span>
+<br />   <span class="sectionToc" >6 <a 
+href="#x1-200006" id="QQ2-1-32">Results</a></span>
+<br />   <span class="sectionToc" >7 <a 
+href="#x1-210007" id="QQ2-1-34">Future Work</a></span>
+   </div><div 
+class="abstract" 
+>
+
+<div class="center" 
+>
+<!--l. 41--><p class="noindent" >
+<!--l. 41--><p class="noindent" ><span 
+class="cmbx-9">Abstract</span></div>
+<!--l. 41--><p class="noindent" >
+     <!--l. 42--><p class="indent" >    <span 
+class="cmr-9">COVID-19 is a newly invented virus that evolved into a pandemic. This virus affects mostly the respiratory</span>
+     <span 
+class="cmr-9">system and could cause mild symptoms as fatigue, cough and in some cases even death. There are more</span>
+     <span 
+class="cmr-9">than 90 million cases worldwide and the death rate is relatively low at approximately 2%. The virus up</span>
+     <span 
+class="cmr-9">to this day, has affected millions of citizens in the entire planet. On a social level many people changed</span>
+     <span 
+class="cmr-9">their lifestyle in order to prevent spreading the virus and protect themselves. Also, many people had to lose</span>
+     <span 
+class="cmr-9">their jobs or transfer them on the web. Central banks have reduced policy interest rates and announced</span>
+     <span 
+class="cmr-9">additional financing facilities in order to help both individuals and businesses to recover. Many computer</span>
+     <span 
+class="cmr-9">scientists and physicians created CNNs (Convolutional Neural Networks) in order to be able to detect from</span>
+     <span 
+class="cmr-9">a chest X-ray if the patients suffer from COVID-19 or not and reduce the time that doctors have to spend</span>
+     <span 
+class="cmr-9">with their patients. In order to create the models, they need large amounts of chest X-rays from COVID-19</span>
+     <span 
+class="cmr-9">patients and non-COVID-19 patients to achieve high accuracy and help physicians diagnose patients fast and</span>
+     <span 
+class="cmr-9">securely. The most accurate network was ResNet-101 with 99.51% accuracy. After the review of the papers</span>
+     <span 
+class="cmr-9">two different versions of COVnet-101 were developed with 97.4% and 91.5% accuracy correspondingly.</span>
+</div>
+<!--l. 45--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-20001"></a>Description</h3>
+<!--l. 46--><p class="noindent" >Coronavirus (COVID-19) is a newly infectious disease that has evolved into a pandemic in March 2020. Specifically, the
+first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in a
+seafood wholesale market. A number of patients initially diagnosed with a form of pneumonia, that later
+discovered through samples of sufferers, that originates from an unknown, till then, beta-coronavirus virus
+<span class="cite">[<a 
+href="#Xfirstcases">1</a>]</span>.
+<!--l. 48--><p class="indent" >   The most common symptoms of the virus today are fever, cough, fatigue, expectoration and shortness of breath.
+More rarely, sufferers experience headaches or dizziness, diarrhea, nausea and vomiting <span class="cite">[<a 
+href="#Xsymptoms1">2</a>]</span>. Examining the samples from
+the sufferers, it was observed that some social groups are more likely to get infected and experience severe respiratory
+problems originated from the virus [Figure: <a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:CovidCasesChina --></a>] <span class="cite">[<a 
+href="#Xpatients">4</a>]</span>.
+<!--l. 50--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-2001r1"></a>
+<!--l. 51--><p class="noindent" ><img 
+src="assets/cases-in-china.png" alt="PIC">
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Impact of cardiovascular metabolic diseases on COVID-19 in China</span></div><!--tex4ht:label?: x1-2001r1 -->
+<!--l. 54--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 56--><p class="indent" >   Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than DNA virus. This is the reason why
+Coronaviruses are easy to adopt in different environments in order to survive and reproduce. COVID-19 is life
+threatening to humans because the human body has not developed immunity to the virus. Patients&#8217; data is relatively
+encouraging since 85% of COVID-19 patients suffered from mild infection, 10% from severe and only 5% of patients
+suffered from critical infection. Most critical COVID-19 cases are elderly people, people suffering from other diseases
+and individuals who have a weak immune system <span class="cite">[<a 
+href="#XmedicalCOVID">5</a>]</span>. This means that COVID-19 is able to spread and reproduce
+easier and faster on the respiratory system of the patients and cause COVID-19 pneumonia [Figure: <a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:CovidCasesChina --></a>].
+<hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-2002r2"></a>
+<!--l. 59--><p class="noindent" ><img 
+src="assets/covid-vs-pneumonia-vs-normal.png" alt="PIC"  
+/><br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Healthy person vs Normal Pneumonia vs COVID-19 Pneumonia</span></div><!--tex4ht:label?: x1-2002r2 -->
+<!--l. 62--><p class="indent" >   </div><hr class="endfigure">
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-30002"></a>Impact of COVID-19</h3>
+<!--l. 68--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-40002.1"></a>Cases</h4>
+<!--l. 69--><p class="noindent" >Although the first sign of COVID-19 was found in December 2019 there are more than 85 million cases of COVID-19
+worldwide. More than 60 million patients recovered and the death rate, up to this date, is approximately 2.17%. Up to
+this day most cases are reported in the United States of America with 21 million cases, India with 10 million cases and
+Brazil with more than 7 million cases. <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-4001r3"></a>
+<div class="center" 
+>
+<!--l. 71--><p class="noindent" >
+<!--l. 72--><p class="noindent" >
+
+
+<img 
+src="assets/worldwide_plot.png" alt="PIC"
+style="width: 70%; margin:0 auto;"
+/>
+
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">COVID-19 worldwide cases.</span></div><!--tex4ht:label?: x1-4001r3 -->
+</div>
+<!--l. 76--><p class="indent" >   </div><hr class="endfigure">
+<!--l. 77--><p class="indent" >   In europe more than 24.8 million cases have been reported and the death rate in Europe is approximately 2.2%.
+European countries with the most cases are Russia with more than 3 million cases, France with 2.5 million cases and
+the United Kingdom with 2.3 million cases.
+<!--l. 78--><p class="indent" >   In Greece there have been reported more than 133 thousand cases and the death rate is 3.3%. More than 23
+thousand people have been recovered.
+<!--l. 80--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-4002r4"></a>
+<div class="center" 
+>
+<!--l. 81--><p class="noindent" >
+<!--l. 82--><p class="noindent" ><img 
+src="assets/greece_plot.png" alt="PIC"  
+style="width: 70%; margin:0 auto;"
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">COVID-19 Cases in Greece.</span></div><!--tex4ht:label?: x1-4002r4 -->
+</div>
+<!--l. 86--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-50002.2"></a>Cost</h4>
+<!--l. 90--><p class="noindent" >
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.1   </span> <a 
+ id="x1-60002.2.1"></a>Social cost</h5>
+<!--l. 91--><p class="noindent" >COVID-19 changed people&#8217;s lives on a social level during the pandemic. People had to stay inside to
+prevent spending the virus and had to change their lifestyle and their habits. The pandemic affected people
+differently on a global level. Citizens had to be quarantined in their houses and a large number of citizens
+either be unemployed or work from home. More and more people had to transfer their businesses on
+the web, in order to survive and most of the work needed to be done via a computer. Children from all
+different age groups had attended online classes and most social events and conferences were held on online
+platforms.
+<!--l. 92--><p class="indent" >   Another huge social impact of COVID-19 was the prioritization of admissions in medical centers. Hospitals were
+filled with patients and in extreme cases (Italy, Spain) doctors had to prioritize patients from the seriousness of their
+condition. There was a lack of medical equipment in some cases and also hospitals and medical centers could cure only
+patients with severe conditions. Another impact of the COVID-19 pandemic on a personal level is that people had to
+constantly wear face masks and sanitize regularly but also avoid unnecessary human contact in order to prevent
+spreading the virus <span class="cite">[<a 
+href="#Xsymptoms2">3</a>]</span>.
+   <h5 class="subsubsectionHead"><span class="titlemark">2.2.2   </span> <a 
+ id="x1-70002.2.2"></a>Financial cost</h5>
+<!--l. 95--><p class="noindent" >COVID-19 affected the world economy. Many countries such as the United Kingdom and Japan had to deal with a
+severe drop in their main index higher than 20% and other countries with big technological companies, were benefited
+by the pandemic. More specifically, the IMF (International Monetary Fund) estimated that government stimulus
+packages during the pandemic amounted to 3.3 trillion <span 
+class="tcrm-1000">$ </span>, and additional loans amounted to 4.5 trillion <span 
+class="tcrm-1000">$</span>. In many
+countries, central banks <span class="cite">[<a 
+href="#Xfinancial_cost">28</a>]</span>.
+<!--l. 98--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-80003"></a>Need for analytics</h3>
+<!--l. 99--><p class="noindent" >Nowadays, thanks to technological advancement, the living standard has been significantly increased. One the medical
+field, the necessary time to diagnose an illness has drastically decreased thanks to modern techniques and the help
+of computer scientists. More specifically, new applications with artificial intelligent techniques coupled
+with radiological imaging can help physicians detect diseases on patients faster and accurately. Another
+benefit is that these applications can be used especially in remote areas where there is a lack of specialized
+physicians. The physicians could use these applications to maximize the mean time that takes to diagnose a
+patient.
+<!--l. 101--><p class="indent" >   These applications could greatly benefit detection of COVID-19 since this virus is highly contagious among patients
+and physicians. This means that the physicians have to work in high workload conditions and interact with
+patients. Under these conditions the diagnosis should become faster and even better, in certain cases
+could be done remotely. The applications need just an X-ray of the patients&#8217; chest to determine if they
+suffer from COVID-19. In this view, the physicians and computer scientists need large amounts of X-ray
+images in order to trim models with high accuracy to make the diagnosis of COVID-19 a fast and secure
+process.
+<!--l. 104--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">4   </span> <a 
+ id="x1-90004"></a>Review</h3>
+<!--l. 105--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">4.1   </span> <a 
+ id="x1-100004.1"></a>Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images:
+Results of 10 convolutional neural networks</h4>
+<!--l. 105--><p class="noindent" ><span class="cite">[<a 
+href="#Xfirstreview">6</a>]</span> <br 
+class="newline" />The first study focuses on the improvement of COVID-19 diagnosis process and proposes artificial intelligent
+techniques for reliable and faster results from previous methods, such as computed tomography (CT). More
+specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each
+of them [Table: <a 
+href="#x1-20001r4">4<!--tex4ht:ref: tab:table1 --></a>]. The network ResNet-101 <span class="cite">[<a 
+href="#Xresnet">12</a>]</span> achieved 99.51% accuracy, the best one described in
+this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and
+86 (35 female and 51 male) non-COVID-19 patients. The age of COVID-19 positive is 50.22 <span 
+class="cmsy-10">% </span>10.85
+and of non-COVID-19 is 61.45 <span 
+class="cmsy-10">% </span>15.04. In order to create the CNN, the computed tomography images
+were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNN more
+efficient, for every different network used in the study, the input layer was replaced with a new one based on
+the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set
+to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and
+validation frequency was set to 5. The dataset is divided to 80% train data and 20% validation data. In
+each epoch the dataset was shaffled and if the training process stayed the same, the training process
+stopped.
+   <div class="table">
+<!--l. 109--><p class="indent" >   <a 
+ id="x1-10001r1"></a><hr class="float"><div class="float" 
+>
+<div class="center" 
+>
+<!--l. 110--><p class="noindent" >
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;1: </span><span  
+class="content">Results of 10 CNN</span></div><!--tex4ht:label?: x1-10001r1 -->
+<div style="width:70%; margin:0 auto;" class="tabular"> <table id="TBL-1" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1"><col 
+id="TBL-1-2"><col 
+id="TBL-1-3"><col 
+id="TBL-1-4"><col 
+id="TBL-1-5"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-1"  
+class="td11"><span 
+class="cmbx-10">Reference</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-2"  
+class="td11">  <span 
+class="cmbx-10">Network  </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-3"  
+class="td11"><span 
+class="cmbx-10">Depth</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-4"  
+class="td11"><span 
+class="cmbx-10">Parameters</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-1-5"  
+class="td11"><span 
+class="cmbx-10">Accuracy</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-2-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xalexnet">7</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-2-2"  
+class="td11">  AlexNet    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-2-3"  
+class="td11">   8    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-2-4"  
+class="td11">     61       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-2-5"  
+class="td11">  78.92    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-3-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xvgg">8</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-3-2"  
+class="td11">  VGG-16    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-3-3"  
+class="td11">  16   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-3-4"  
+class="td11">    138      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-3-5"  
+class="td11">  83.33    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-4-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xvgg">8</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-4-2"  
+class="td11">  VGG-19    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-4-3"  
+class="td11">  19   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-4-4"  
+class="td11">    144      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-4-5"  
+class="td11">  85.29    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-5-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xsqueezenet">9</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-5-2"  
+class="td11"> SqueezeNet  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-5-3"  
+class="td11">  18   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-5-4"  
+class="td11">    1.24      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-5-5"  
+class="td11">  82.84    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-6-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xgooglenet">10</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-6-2"  
+class="td11"> GoogleNet  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-6-3"  
+class="td11">  22   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-6-4"  
+class="td11">     7        </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-6-5"  
+class="td11">  85.29    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-7-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xmobilenet">11</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-7-2"  
+class="td11">MobileNet-V2</td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-7-3"  
+class="td11">  53   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-7-4"  
+class="td11">    3.5       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-7-5"  
+class="td11">  92.16    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-8-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xresnet">12</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-8-2"  
+class="td11">  ResNet-18  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-8-3"  
+class="td11">  18   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-8-4"  
+class="td11">    11.7      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-8-5"  
+class="td11">  91.67    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-9-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-9-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xresnet">12</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-9-2"  
+class="td11">  ResNet-50  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-9-3"  
+class="td11">  50   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-9-4"  
+class="td11">    25.6      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-9-5"  
+class="td11">  94.12    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-10-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-10-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xresnet">12</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-10-2"  
+class="td11"> ResNet-101  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-10-3"  
+class="td11">  101  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-10-4"  
+class="td11">    44.6      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-10-5"  
+class="td11">  99.51    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-11-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-11-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xxception">13</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-11-2"  
+class="td11">  Xception   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-11-3"  
+class="td11">  71   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-11-4"  
+class="td11">    22.9      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-1-11-5"  
+class="td11">  99.02    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-12-"><td  style="white-space:nowrap; text-align:center;" id="TBL-1-12-1"  
+class="td11">          </td></tr></table></div></div>
+   </div><hr class="endfloat" />
+   </div>
+   <h4 class="subsectionHead"><span class="titlemark">4.2   </span> <a 
+ id="x1-110004.2"></a>Automated detection of COVID-19 cases using deep neural networks with X-ray images</h4>
+<!--l. 141--><p class="noindent" ><span class="cite">[<a 
+href="#Xsecondreview">14</a>]</span> <br 
+class="newline" />The second paper called &#8220;Automated detection of COVID-19 cases using deep neural networks with X-ray images&#8221;
+trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper
+were used two different datasets. The first one was called &#8221;A COVID-19 X-ray image database&#8221; which was
+developed by Cohen JP <span class="cite">[<a 
+href="#Xdataset1secondreview">16</a>]</span>. The dataset does not contain enough metadata referring to patients nevertheless,
+there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another
+information is that out of 26 patients the average age of them was 55 years. The second dataset that was
+used was the &#8220;ChestX-ray8 database&#8221; which was developed by Wang et al. <span class="cite">[<a 
+href="#Xdataset2secondreview">17</a>]</span>. This dataset contained
+X-ray images with healthy patients and patients with normal pneumonia however, it does not provide
+any metadata for the patients. The network had two different variants. The first one was able to detect
+whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset,
+only the X-rays with healthy patients were used, to help the network to classify a patient as healthy or
+COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers
+from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in
+order to get all three different results. The network used was the &#8220;DarkCovidNet&#8221; which is based on
+&#8220;Darknet-19&#8221; <span class="cite">[<a 
+href="#Xdarknet">15</a>]</span>, the optimizer was Adam, cross entropy was used as a loss function and the learning
+rate was 3e-3. Finally, the accuracy for binary classification was 98.08 percent and for categorical 87.02
+percent.
+<!--l. 146--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-11001r5"></a>
+<!--l. 147--><p class="noindent" ><img 
+src="assets/architecture-of-the-darkcovidnet-ozturk-tulin-et-al.png" alt="PIC"  
+style="width: 70%; margin:0 auto;">
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;5: </span><span  
+class="content">Architecture of the DarkCovidNet</span></div><!--tex4ht:label?: x1-11001r5 -->
+<!--l. 150--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">4.3   </span> <a 
+ id="x1-120004.3"></a>Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet
+classifier</h4>
+<!--l. 152--><p class="noindent" ><span class="cite">[<a 
+href="#Xthirdreview">18</a>]</span> <br 
+class="newline" />This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction
+of COVID-19. The networks that used were Squeezenet<span class="cite">[<a 
+href="#Xsqueezenet">9</a>]</span>, Darknet-53<span class="cite">[<a 
+href="#Xdarknetpaper3">23</a>]</span>, MobilenetV2<span class="cite">[<a 
+href="#Xmobilenet">11</a>]</span>, Xception<span class="cite">[<a 
+href="#Xxception">13</a>]</span>, Shufflenet<span class="cite">[<a 
+href="#Xshufflenet">22</a>]</span>
+in order to produce a feature matrix of dimension 950x5000. Each network was pre-trained using Imagenet<span class="cite">[<a 
+href="#Ximagenet">21</a>]</span>. The
+feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID
+categories. The first dataset is a combination of a dataset created by Cohen et al<span class="cite">[<a 
+href="#Xdataset1secondreview">16</a>]</span> and a dataset by Kaggle<span class="cite">[<a 
+href="#Xdataset1.2thirdreview">19</a>]</span> and
+has 453 COVID-19 images and 497 non-COVID images(bacterial, varial pneumonia) and had 91.16 percent
+accuracy. The second dataset<span class="cite">[<a 
+href="#Xdataset2thirdreview">20</a>]</span> had 71 COVID-19 images and 7 non-COVID images and had 97.44 percent
+accuracy.
+<!--l. 156--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-12001r6"></a>
+<!--l. 157--><p class="noindent" ><img 
+src="assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png" alt="PIC"  
+style="width:70%; margin:0 auto;">
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;6: </span><span  
+class="content">Architecture of the proposed method</span></div><!--tex4ht:label?: x1-12001r6 -->
+<!--l. 160--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">4.4   </span> <a 
+ id="x1-130004.4"></a>COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray
+Image</h4>
+<!--l. 164--><p class="noindent" ><span class="cite">[<a 
+href="#Xfourth_review">29</a>]</span>
+<!--l. 166--><p class="indent" >   The paper called &#8221;COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray
+Image&#8221; used transfer learning methods of seven different architectures in order to propose a new network called
+&#8220;COVIDX-NET&#8221;. The seven different networks are: VGG19<span class="cite">[<a 
+href="#Xvgg">8</a>]</span>, DenseNet201<span class="cite">[<a 
+href="#Xdensenet">31</a>]</span>, InceptionV3<span class="cite">[<a 
+href="#Xinception">32</a>]</span>, ResNetV2<span class="cite">[<a 
+href="#Xresnet">12</a>]</span>,
+InceptionResNetV2<span class="cite">[<a 
+href="#Xinception">32</a>]</span>, Xception<span class="cite">[<a 
+href="#Xxception">13</a>]</span>, and MobileNetV2<span class="cite">[<a 
+href="#Xmobilenet">11</a>]</span> and the network is able to detect COVID-19 from
+2-dimensional X-ray images. The images<span class="cite">[<a 
+href="#Xdataset1secondreview">16</a>]</span> <span class="cite">[<a 
+href="#Xdataset2fourthreview">30</a>]</span> scaled down to a fixed size of 244x244 and hoe encoding is
+allied on the labels to classify the images as COVID-19 positive or negative. The dataset is split to 80
+percent trained and 20 percent validation data. Later a random sample of training images is selected
+to be applied to the deep learning classifier and then evaluation metrics are applied to record the set&#8217;s
+performance. At the end, the data are tested on the tuned deep learning classifier in order to classify the X-ray
+as COVID-19 positive or negative. The dataset contains 50 Chest X-ray images and half of them (25)
+are positive cases and the highest accuracy was 90 percent from the VGG19<span class="cite">[<a 
+href="#Xvgg">8</a>]</span> and DenseNet201<span class="cite">[<a 
+href="#Xdensenet">31</a>]</span>
+models.
+<!--l. 169--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-13001r7"></a>
+<!--l. 170--><p class="noindent" ><img 
+src="assets/fourth_review.png" alt="PIC"  
+style="width:70%; margin:0 auto;" >
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;7: </span><span  
+class="content">Workflow of proposed COVIDX-Net framework for classifying the COVID-19 status in X-Ray images.</span></div><!--tex4ht:label?: x1-13001r7 -->
+<!--l. 173--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">4.5   </span> <a 
+ id="x1-140004.5"></a>Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection</h4>
+<!--l. 177--><p class="noindent" ><span class="cite">[<a 
+href="#Xfifth_paper">33</a>]</span>
+<!--l. 179--><p class="indent" >   The fifth paper called &#8220;Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection&#8221;
+focuses on the categorization of X-ray images as viral pneumonia (normal pneumonia), non viral pneumonia and
+healthy. They propose a new model called &#8220;CAAD&#8221; from the acronyms Confidence-Aware Anomaly Detection. The
+model contains a feature extractor and a confidence prediction module in order to be able to detect anomalies on
+images where the confidence score is low, or the anomaly score is high, the images are considered to contain an
+anomaly. The major advantage of paper is the fact that they treat all viral pneumonia cases as anomalies to maximize
+the accuracy. The model used six stages of layer-by-layer convolution operations and each X-ray image is processed by
+MBConv blocks, and later they are transformed into a d-dimensional feature vector by a global average
+pooling layer. The datasets used were the X-VIRAL dataset with 5.977 viral pneumonia cases and 37.393
+non-viral pneumonia or healthy cases and the X-COVID dataset<span class="cite">[<a 
+href="#Xdataset1secondreview">16</a>]</span> that contains 106 COVID-19 cases and
+107 healthy cases. The highest accuracy was achieved was 80.65 percent with the EfficientNet-B0<span class="cite">[<a 
+href="#Xefficientnet">34</a>]</span>
+network
+<!--l. 181--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-14001r8"></a>
+<!--l. 182--><p class="noindent" ><img 
+src="assets/fifth_paper.png" alt="PIC"  
+style="width:70%; margin:0 auto;" >
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;8: </span><span  
+class="content">Diagram of the proposed CAAD model. This model is composed of an anomaly detection module
+and a confidence prediction module, which are designed to predict the anomaly score and confidence score of
+each input, respectively..</span></div><!--tex4ht:label?: x1-14001r8 -->
+<!--l. 186--><p class="indent" >   </div><hr class="endfigure">
+   <h3 class="sectionHead"><span class="titlemark">5   </span> <a 
+ id="x1-150005"></a>COVnet-101</h3>
+<!--l. 190--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">5.1   </span> <a 
+ id="x1-160005.1"></a>ResNet-101</h4>
+<!--l. 192--><p class="noindent" >For this exercise, instead of just reviewing papers, we designed our custom neural network based on the ResNet-101<span class="cite">[<a 
+href="#Xresnet">12</a>]</span>.
+In order to explain the custom network, the ResNet-101 should be presented.
+<!--l. 193--><p class="indent" >   The ResNet was trained using ImageNet 2012 Dataset <span class="cite">[<a 
+href="#Ximagenet">21</a>]</span> and for its creation two models were trained. More
+specifically, these two models were a plain model and a residual model.
+<!--l. 194--><p class="indent" >   The plain network is inspired by the philosophy of VGG networks<span class="cite">[<a 
+href="#Xvgg">8</a>]</span>. The filters used in the convolutional layers
+were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax
+and the total number of weighted layers is 34.
+<!--l. 195--><p class="indent" >   The residual network is based on the plain network and the main difference is the addition of shortcut connections.
+These shortcuts function differently when the input and output have the same dimensions and when they do not. More
+accurately, when the input and output are not of the same dimensions, meaning that the dimensions are increasing,
+then there are two different scenarios:
+<!--l. 196--><p class="indent" >   1. The shortcut performs identity mapping with extra zero entries padded for increasing dimensions and this option
+does not add any extra parameters.
+<!--l. 197--><p class="indent" >   2. The projection shortcut is activated in order to match dimensions done by 1<span 
+class="tcrm-1000">&#x00D7;</span>1 convolutions. When the input and
+output are the same dimensions then the identity shortcuts are used on the network.
+<!--l. 199--><p class="indent" >   ResNet-101 was created with a residual network with 101 layers and 3-layer blocks in order to increase its
+accuracy.
+<!--l. 200--><p class="indent" >   The ResNet-101 was trained using the dataset named &#8220;imagenet 2012&#8221;. This dataset has 1000 classes, the models
+are trained at 1.28 million images and evaluated on 50k validation images. In order to increase the number of images
+the ResNet-101 creators used data augmentation techniques, more specifically scale augmentation and color
+augmentation. The images were cropped to 224<span 
+class="tcrm-1000">&#x00D7;</span>244 from random parts either from the original image or from
+horizontal flipped copies from the images and they applied standard color augmentation <span class="cite">[<a 
+href="#Ximagenet">21</a>]</span>. To make the neural
+network faster and stable through normalization they used batch normalization<span class="cite">[<a 
+href="#Xbatchnormalization">26</a>]</span> right after each convolution and
+before activation.
+<!--l. 201--><p class="indent" >   The optimizer was SGD with a mini-batch size of 256, the learning rate starts from 0.1 and is divided by 10 when
+the error plateaus and the models are trained for up to 60 <span 
+class="tcrm-1000">&#x00D7; </span>104 iterations. They used a weight decay of 0.0001, a
+momentum of 0.9 and dropout was not used<span class="cite">[<a 
+href="#Xdropout">27</a>]</span>.
+<!--l. 204--><p class="indent" >   <hr class="figure"><div class="figure" 
+>
+<a 
+ id="x1-16001r9"></a>
+<div class="center" 
+>
+<!--l. 205--><p class="noindent" >
+<!--l. 206--><p class="noindent" ><img 
+src="assets/resnet-vs-vgg.png" alt="PIC"  
+style="width: 70%; margin:0 auto;" >
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;9: </span><span  
+class="content">VGG vs ResNet</span></div><!--tex4ht:label?: x1-16001r9 -->
+</div>
+<!--l. 210--><p class="indent" >   </div><hr class="endfigure">
+   <h4 class="subsectionHead"><span class="titlemark">5.2   </span> <a 
+ id="x1-170005.2"></a>COVnet-101 network</h4>
+<!--l. 213--><p class="noindent" >COVnet-101, as mentioned in Section <a 
+href="#x1-160005.1">5.1<!--tex4ht:ref: ResNet-101 --></a>, was based on ResNet-101. The method used is called &#8220;Transfer learning&#8221;
+meaning that ResNet-101 was used as a starting point to create COVnet-101.
+<!--l. 214--><p class="indent" >   The images used in COVnet-101 were re-sized to 128x128, then they were shuffled and normalized by dividing with
+255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam and the learning
+rate is 0.01.
+<!--l. 215--><p class="indent" >   There are two different versions of the network. The first one is called &#8220;COVID-19 vs Non-COVID-19&#8221; and it detects
+COVID-19 on patients from X-ray images. This implies that non COVID-19 patients can be either healthy or
+suffer from other diseases instead of COVID-19. The second version is called &#8220;COVID-19 vs Healthy vs
+Pneumonia&#8221; and it detects COVID-19 and/or pneumonia from X-ray images. This version of the network is an
+improved version of COVID-19 vs Non-COVID-19 since it can detect if a patient is healthy or suffers
+from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is
+that, the version called COVID-19 vs Healthy vs Pneumonia can detect more than one malady from an
+image.
+<!--l. 216--><p class="indent" >   The dataset used for healthy and pneumonia chest X-ray images is from Kaggle created by Paul Mooney <span class="cite">[<a 
+href="#Xdataset1custom">24</a>]</span> and it
+contains 5,863 images. The datasets for COVID-19 detection were &#8221;A COVID-19 X-ray image database&#8221; which was
+developed by Cohen JP <span class="cite">[<a 
+href="#Xdataset1secondreview">16</a>]</span>, &#8221;COVID-19 Chest X-ray Dataset Initiative&#8221; <span class="cite">[<a 
+href="#Xdatasetcustomcovid">25</a>]</span> as well as &#8221;Actualmed COVID-19 Chest
+X-ray Dataset Initiative&#8221; <span class="cite">[<a 
+href="#Xdatasetcustomcovid">25</a>]</span>. The total images are 6432 and the division to trained / validation images percentage was
+80% / 20%.
+<!--l. 218--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">5.3   </span> <a 
+ id="x1-180005.3"></a>COVID-19 vs Healthy vs Pneumonia</h4>
+<!--l. 220--><p class="noindent" >In order to be able to detect if a patient suffers from COVID-19 or pneumonia or not, we created the &#8221;COVID-19 vs
+Healthy vs Pneumonia&#8221; network. For the classifications where used the Loss function which was used is
+Categorical Cross Entropy and the last&#8217;s layer function is Softmax because there were three different
+labels
+<!--l. 221--><p class="indent" >   The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the
+non-trainable 42,658,176. The accuracy of the network was 91,5%
+   <div class="table">
+<!--l. 223--><p class="indent" >   <a 
+ id="x1-18001r2"></a><hr class="float"><div class="float" 
+>
+<div class="center" 
+>
+<!--l. 224--><p class="noindent" >
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;2: </span><span  
+class="content">COVID-19 vs Healthy vs Pneumonia</span></div><!--tex4ht:label?: x1-18001r2 -->
+<div class="tabular" style="width: 70%; margin:0 auto;"> <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"><col 
+id="TBL-2-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
+class="td11">   <span 
+class="cmbx-10">Layer (type)    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-2"  
+class="td11"> <span 
+class="cmbx-10">Output Shape </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-3"  
+class="td11"> <span 
+class="cmbx-10">Param </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-1"  
+class="td11">resnet101 (Functional)</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-2"  
+class="td11">(None, 4, 4, 2048)</td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-3"  
+class="td11">42658176</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-1"  
+class="td11">   flatten (Flatten)    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-2"  
+class="td11">  (None, 32768)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-3"  
+class="td11">   0     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
+class="td11">    dense (Dense)      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-2"  
+class="td11">  (None, 1024)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-3"  
+class="td11">33555456</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-1"  
+class="td11">  dropout (Dropout)  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-2"  
+class="td11">  (None, 1024)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-3"  
+class="td11">   0     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-1"  
+class="td11">   dense1 (Dense)     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-2"  
+class="td11">    (None, 3)      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-3"  
+class="td11">  3075   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-1"  
+class="td11">                   </td></tr></table></div></div>
+   </div><hr class="endfloat" />
+   </div>
+   <h4 class="subsectionHead"><span class="titlemark">5.4   </span> <a 
+ id="x1-190005.4"></a>COVID-19 vs Non-COVID-19</h4>
+<!--l. 248--><p class="noindent" >In order to be able to detect if a patient suffers from COVID-19 or not, we created the &#8221;COVID-19 vs Non-COVID-19&#8221;
+network. For the classifications where used the Loss function below is Binary Crossentropy and the Last&#8217;s layer function
+is Sigmoid because of the fact that they are two different labels.
+<!--l. 248--><p class="indent" >   . The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the
+non-trainable 42,658,176.The accuracy of the network was 97,4 %
+   <div class="table">
+<!--l. 251--><p class="indent" >   <a 
+ id="x1-19001r3"></a><hr class="float"><div class="float" 
+>
+<div class="center" 
+>
+<!--l. 252--><p class="noindent" >
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;3: </span><span  
+class="content">COVID-19 vs Non-COVID-19</span></div><!--tex4ht:label?: x1-19001r3 -->
+<div class="tabular" style="width:70%; margin:0 auto;"> <table id="TBL-3" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-3-1g"><col 
+id="TBL-3-1"><col 
+id="TBL-3-2"><col 
+id="TBL-3-3"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-1"  
+class="td11">   <span 
+class="cmbx-10">Layer (type)    </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-2"  
+class="td11"> <span 
+class="cmbx-10">Output Shape </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-1-3"  
+class="td11"> <span 
+class="cmbx-10">Param </span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-1"  
+class="td11">resnet101 (Functional)</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-2"  
+class="td11">(None, 4, 4, 2048)</td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-2-3"  
+class="td11">42658176</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-1"  
+class="td11">   flatten (Flatten)    </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-2"  
+class="td11">  (None, 32768)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-3-3"  
+class="td11">   0     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-1"  
+class="td11">    dense (Dense)      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-2"  
+class="td11">  (None, 1024)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-4-3"  
+class="td11">33555456</td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-1"  
+class="td11">  dropout (Dropout)  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-2"  
+class="td11">  (None, 1024)   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-5-3"  
+class="td11">   0     </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-1"  
+class="td11">   dense1 (Dense)     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-2"  
+class="td11">    (None, 1)      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-3-6-3"  
+class="td11">  1025   </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-3-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-3-7-1"  
+class="td11">                   </td></tr></table></div></div>
+   </div><hr class="endfloat" />
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">6   </span> <a 
+ id="x1-200006"></a>Results</h3>
+<!--l. 274--><p class="noindent" >The majority of papers focused on the creation of multiple networks. For instance, one for binary and one for
+categorical classification. However, the most accurate ones were these with binary classification ( COVID-19 vs
+Non-COVID-19 ). First of all, the first paper<span class="cite">[<a 
+href="#Xfirstreview">6</a>]</span>, after training 10 Convolutional Neural Networks came to the
+conclusion that ResNet-101<span class="cite">[<a 
+href="#Xresnet">12</a>]</span> had the best accuracy among the rest of the networks and the papers
+with an really minimal clinical dataset with complete metadata. Nonetheless, the other papers, despite
+the fact of their decent accuracy, their datasets did not have complete metadata and they used online
+datasets from the internet. Except from the first paper<span class="cite">[<a 
+href="#Xfirstreview">6</a>]</span>, the third one <span class="cite">[<a 
+href="#Xthirdreview">18</a>]</span>, had a high accuracy with an
+even more minimal dataset than the first one.<span class="cite">[<a 
+href="#Xfirstreview">6</a>]</span> It was quite interesting because its method was a bit
+different than the others. Specifically, it extracted features from multiple Convolutional Neural Networks
+and used a Bayesnet classifier while the others used only exclusively pre-trained networks or transfer
+learning. Our custom network, CovNet-101, and the second paper&#8217;s network<span class="cite">[<a 
+href="#Xsecondreview">14</a>]</span>, DarkCovidNet, had
+very close accuracy to the previous ones but their datasets had a bigger ammount of images. Finally, the
+fourth<span class="cite">[<a 
+href="#Xfourth_review">29</a>]</span> and the fifth<span class="cite">[<a 
+href="#Xfifth_paper">33</a>]</span> paper had quite lower accuracy than the others, so that their efficiency was not
+enough.
+   <div class="table">
+<!--l. 276--><p class="indent" >   <a 
+ id="x1-20001r4"></a><hr class="float"><div class="float" 
+>
+<div class="center" 
+>
+<!--l. 277--><p class="noindent" >
+<br /> <div class="caption" 
+><span class="id">Table&#x00A0;4: </span><span  
+class="content">Results</span></div><!--tex4ht:label?: x1-20001r4 -->
+<div class="tabular" style="font-size:12px;"> <table id="TBL-4" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-4-1g"><col 
+id="TBL-4-1"><col 
+id="TBL-4-2"><col 
+id="TBL-4-3"><col 
+id="TBL-4-4"><col 
+id="TBL-4-5"><col 
+id="TBL-4-6"></colgroup><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-1"  
+class="td11"><span 
+class="cmbx-10">Reference</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-2"  
+class="td11">     <span 
+class="cmbx-10">Problem      </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-3"  
+class="td11">       <span 
+class="cmbx-10">Method          </span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-4"  
+class="td11"><span 
+class="cmbx-10">Types of data</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-5"  
+class="td11"><span 
+class="cmbx-10">Sample size</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-1-6"  
+class="td11"><span 
+class="cmbx-10">Accuracy</span></td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xfirstreview">6</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-3"  
+class="td11">      ResNet-101         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-4"  
+class="td11">   Clinical     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-5"  
+class="td11"> 108 patients </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-2-6"  
+class="td11">  99.51    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xsecondreview">14</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-3"  
+class="td11">     DarkCovidNet       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-4"  
+class="td11">Online Datasets</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-5"  
+class="td11"> 1127 images </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-3-6"  
+class="td11">  98.08    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xthirdreview">18</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-3"  
+class="td11">Multi-CNN and Bayesnet</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-4"  
+class="td11">Online Datasets</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-5"  
+class="td11"> 78 images  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-4-6"  
+class="td11">  97.44    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xfourth_review">29</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-3"  
+class="td11">VGG19 and DenseNet201</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-4"  
+class="td11">Online Datasets</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-5"  
+class="td11"> 50 images  </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-5-6"  
+class="td11">  90.00    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-1"  
+class="td11">    <span class="cite">[<a 
+href="#Xfifth_paper">33</a>]</span>      </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-3"  
+class="td11">        CAAD            </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-4"  
+class="td11">Online Datasets</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-5"  
+class="td11">43583 images</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-6-6"  
+class="td11">  80.65    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-1"  
+class="td11">  Custom   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-2"  
+class="td11">Binary Classification</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-3"  
+class="td11">      COVnet-101         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-4"  
+class="td11">Online Datasets</td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-5"  
+class="td11"> 6432 images </td><td  style="white-space:nowrap; text-align:center;" id="TBL-4-7-6"  
+class="td11">  97.40    </td>
+</tr><tr 
+class="hline"><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td><td><hr></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-4-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-4-8-1"  
+class="td11">          </td></tr></table></div></div>
+   </div><hr class="endfloat" />
+   </div>
+   <h3 class="sectionHead"><span class="titlemark">7   </span> <a 
+ id="x1-210007"></a>Future Work</h3>
+<!--l. 301--><p class="noindent" >In the future we would like to focus mainly on the networks&#8217; optimization. We would like to increase their accuracy and
+make them run faster. Another option would be the creation of an informative system. The informative system could
+contain a mobile app which could scan Chest x-rays and could classify them as either COVID-19 positive or COVID-19
+negative in the case that the COVID-19 vs Non-COVID-19 network was used or could classify them as COVID-19
+positive or pneumonia positive or as healthy in the case that the COVID-19 vs Healthy vs Pneumonia network was used
+and send them to a cloud server with their appropriate information (Disease, Patient ID, Age, Gender).
+The new X-rays could help the continuous training of the COVnet-101and make it more accurate. At
+the end of the day a huge dataset could be created in order to help more scientists create their custom
+networks.
+<!--l. 304--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-220007"></a>References</h3>
+<!--l. 304--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xfirstcases"></a>Zhu, Na, et al. <span 
+class="cmti-10">A novel coronavirus from patients with pneumonia in China, 2019.</span>. New England Journal
+   of Medicine (2020).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsymptoms1"></a>Li, Long-quan, et al. <span 
+class="cmti-10">COVID-19 patients&#8217; clinical characteristics, discharge rate, and fatality rate of</span>
+   <span 
+class="cmti-10">meta-analysis. </span>Journal of medical virology 92.6 (2020): 577-583.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsymptoms2"></a>Huang, Chaolin, et al. <span 
+class="cmti-10">Clinical features of patients infected with 2019 novel coronavirus in Wuhan,</span>
+   <span 
+class="cmti-10">China.</span>. The lancet 395.10223 (2020): 497-506.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xpatients"></a>Li, Bo, et al. <span 
+class="cmti-10">Prevalence and impact of cardiovascular metabolic diseases on COVID-19 in China. </span>Clinical
+   Research in Cardiology 109.5 (2020): 531-538.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XmedicalCOVID"></a>Abdulamir, Ahmed S., and Rand R. Hafidh. <span 
+class="cmti-10">The Possible Immunological Pathways for the Variable</span>
+   <span 
+class="cmti-10">Immunopathogenesis  of  COVID&#8211;19  Infections  among  Healthy  Adults,  Elderly  and  Children.  </span>Electronic
+   Journal of General Medicine 17.4 (2020).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xfirstreview"></a>Ardakani, Ali Abbasian, et al. <span 
+class="cmti-10">Application of deep learning technique to manage COVID-19 in routine</span>
+   <span 
+class="cmti-10">clinical practice using CT images: Results of 10 convolutional neural networks.</span>. Computers in Biology and
+   Medicine (2020): 103795.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xalexnet"></a>Krizhevsky  Ilya  Sutskever,  et  al.  <span 
+class="cmti-10">Imagenet  classification  with  deep  convolutional  neural  networks.</span>.
+   Advances in neural information processing systems. 2012.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [8]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xvgg"></a>Simonyan,  Karen,  et  al.  <span 
+class="cmti-10">Very  deep  convolutional  networks  for  large-scale  image  recognition.</span>.  arXiv
+   preprint arXiv:1409.1556 (2014).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [9]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsqueezenet"></a>Iandola, Forrest N., et al. <span 
+class="cmti-10">SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and 0.5 MB</span>
+   <span 
+class="cmti-10">model size.</span>. arXiv preprint arXiv:1602.07360 (2016).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [10]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xgooglenet"></a>C. Szegedy et al. <span 
+class="cmti-10">Going deeper with convolutions  </span>2015 IEEE Conference on Computer Vision and
+   Pattern Recognition (CVPR), Boston, MA, 2015, pp. 1-9, doi: 10.1109/CVPR.2015.7298594.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [11]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xmobilenet"></a>M. Sandler, A. Howard et al. <span 
+class="cmti-10">MobileNetV2: Inverted Residuals and Linear Bottlenecks </span>2018 IEEE/CVF
+   Conference on Computer Vision and Pattern Recognition, Salt Lake City, UT, 2018, pp. 4510-4520, doi:
+   10.1109/CVPR.2018.00474.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [12]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xresnet"></a>K.  He,  X.  Zhang,  et  al.  <span 
+class="cmti-10">Deep  Residual  Learning  for  Image  Recognition.</span>.  2016  IEEE  Conference
+   on  Computer  Vision  and  Pattern  Recognition  (CVPR),  Las  Vegas,  NV,  2016,  pp.  770-778,  doi:
+   10.1109/CVPR.2016.90.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [13]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xxception"></a>Chollet, Fransois. <span 
+class="cmti-10">Xception: Deep learning with depthwise separable convolutions.</span>. Proceedings of the
+   IEEE conference on computer vision and pattern recognition. 2017.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [14]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xsecondreview"></a>Ozturk, Tulin, et al. <span 
+class="cmti-10">Automated detection of COVID-19 cases using deep neural networks with X-ray</span>
+   <span 
+class="cmti-10">images</span>. Computers in Biology and Medicine (2020): 103792.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [15]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdarknet"></a>Redmon, Joseph et al. <span 
+class="cmti-10">YOLO9000: better, faster, stronger.</span>. Proceedings of the IEEE conference on
+   computer vision and pattern recognition. 2017.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [16]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset1secondreview"></a>J.P.            Cohen            <span 
+class="cmti-10">COVID-19           Image           Data           Collection.           2020.</span>
+   https://github.com/ieee8023/COVID-chestxray-dataset.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [17]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset2secondreview"></a>X. Wang et al. <span 
+class="cmti-10">Chestx-ray8: hospital-scale chest x-ray database and benchmarks on weakly-supervised</span>
+   <span 
+class="cmti-10">classification and localization of common thorax diseases </span>Proceedings of the IEEE Conference on Computer
+   Vision and Pattern Recognition, 2017, pp. 2097&#8211;2106.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [18]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xthirdreview"></a>Abraham, Bejoy et al. <span 
+class="cmti-10">Computer-aided detection of COVID-19 from X-ray images using multi-CNN</span>
+   <span 
+class="cmti-10">and Bayesnet classifier.</span>. Biocybernetics and biomedical engineering 40.4 (2020): 1436-1445.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [19]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset1.2thirdreview"></a>Kermany, et al. <span 
+class="cmti-10">Identifying medical diagnoses and treatable diseases by image-based deep learning.</span>. Cell
+   172.5 (2018): 1122-1131.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [20]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset2thirdreview"></a>Dadario AMV. Covid-19 X rays; 2020. <span 
+class="cmti-10">http://dx.doi.org/10.34740/KAGGLE/DSV/101946</span>. Available
+   from:https://www.kaggle.com/dsv/1019469.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [21]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Ximagenet"></a>Deng J et al. <span 
+class="cmti-10">Imagenet: alarge-scale hierarchical image database.</span>. 2009 IEEEConference on Computer
+   Vision and Pattern Recognition.IEEE; 2009. p. 248&#8211;55.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [22]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xshufflenet"></a>Zhang  X  et  al.  <span 
+class="cmti-10">Shufflenet:  an  extremelyefficient  convolutional  neural  network  for  mobile  devices.</span>.
+   Proceedings of the IEEE Conference on Computer Visionand Pattern Recognition; 2018. p. 6848&#8211;56.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [23]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdarknetpaper3"></a>Redmon J et al. <span 
+class="cmti-10">Yolov3: an incremental improvement.</span>. 2018, arXiv preprint arXiv:1804.02767
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [24]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset1custom"></a>Paul    Mooney.    Chest    X-Ray    Images    (Pneumonia);    2017    <span 
+class="cmti-10">Kaggle.</span>.    Available    from:
+   https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [25]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdatasetcustomcovid"></a>Wang et al. <span 
+class="cmti-10">COVID-Net: a tailored deep convolutional neural network design for detection of COVID-19</span>
+   <span 
+class="cmti-10">cases from chest X-ray images </span>2020, https://doi.org/10.1038/s41598-020-76550-z
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [26]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xbatchnormalization"></a>S. Ioffe and C. Szegedy. <span 
+class="cmti-10">Batch normalization: Accelerating deep network training by reducing internal</span>
+   <span 
+class="cmti-10">covariate shift.</span>. In ICML, 2015.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [27]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdropout"></a>G.  E.  Hinton  et  al.  <span 
+class="cmti-10">Improving neural networks by preventing co- adaptation of feature detectors.</span>.
+   arXiv:1207.0580, 2012.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [28]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xfinancial_cost"></a>Akhtaruzzaman,  Md,  Sabri  Boubaker,  and  Ahmet  Sensoy  <span 
+class="cmti-10">&#8221;Financial contagion during COVID&#8211;19</span>
+   <span 
+class="cmti-10">crisis.&#8221;</span>. Finance Research Letters (2020): 101604.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [29]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xfourth_review"></a>Hemdan, Ezz El-Din, Marwa A. Shouman, and Mohamed Esmail Karar. <span 
+class="cmti-10">&#8221;Covidx-net: A framework of</span>
+   <span 
+class="cmti-10">deep learning classifiers to diagnose covid-19 in x-ray images.&#8221; </span>arXiv preprint arXiv:2003.11055 (2020).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [30]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdataset2fourthreview"></a>Pyimagesearch <span 
+class="cmti-10">Medical dataset </span>Available from https://www.pyimagesearch.com/category/medical/
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [31]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdensenet"></a>G. Huang et al. <span 
+class="cmti-10">&#8221;Densely connected convolutional networks,&#8221; in Proceedings - 30th IEEE Conference</span>
+   <span 
+class="cmti-10">on Computer Vision and Pattern Recognition.</span>. CVPR 2017 vol. 2017-January, ed: Institute of Electrical and
+   Electronics Engineers Inc., 2017, pp. 2261-2269.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [32]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xinception"></a>C. Szegedy et al. <span 
+class="cmti-10">&#8221;Rethinking the Inception Architecture for Computer Vision&#8221;.</span>. 2016 IEEE Conference
+   on Computer Vision and Pattern Recognition (CVPR), 2016, pp. 2818-2826.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [33]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xfifth_paper"></a>Zhang, Jianpeng, et al. <span 
+class="cmti-10">&#8221;Covid-19 screening on chest x-ray images using deep learning based anomaly</span>
+   <span 
+class="cmti-10">detection.&#8221;</span>. arXiv preprint arXiv:2003.12338 (2020).
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [34]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xefficientnet"></a>M.  Tan  and  Q.  Le  <span 
+class="cmti-10">&#8220;Efficientnet:  Rethinking  model  scaling  for  convolutional  neural  networks.&#8221;</span>
+   International Conference on Machine Learning, 2019, pp. 6105&#8211;6114.</p></div>
+
+
+<a href="https://github.com/Stavrospanakakis/covid-19-diagnosis">Source code</a>
+</body></html> 
+
+
+
