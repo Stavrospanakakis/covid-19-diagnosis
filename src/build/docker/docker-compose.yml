@@ -1,0 +1,7 @@
+version: "3.3"
+
+services:
+  web:
+    image: stavrospanakakis/covid-19-diagnosis_web
+  app:
+    image: stavrospanakakis/covid-19-diagnosis_app
