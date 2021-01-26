@@ -1,0 +1,481 @@
+	\documentclass{article}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{float}
+	\usepackage{multicol}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+% left=20mm,
+ top=20mm,
+ }
+
+%\title{Convolutional Neural Networks for the detection of COVID-19}
+%\author{Stavros Panakakis 2018108,}
+%\author{Sophia Tsivoula 2018130}
+
+\pagebreak
+
+\begin{document}
+\begin{center}
+{\LARGE Convolutional Neural Networks for the detection of COVID-19}\\
+\vspace{0.8cm}
+{\large Stavros Panakakis 2018108, \\ Sophia Tsivoula 2018130}
+\vspace{5cm}
+\begin{figure}[h!]
+\begin{center}
+
+\includegraphics[width=0.4\textwidth]{./assets/Ionian-University-Logo.png}\\
+Ionian University\\ Department of Informatics
+\end{center}
+\end{figure}
+
+\vspace{7cm}
+{\large Corfu 2020-2021}
+\end{center}
+\pagebreak
+
+\tableofcontents
+\pagebreak
+\begin{abstract}
+COVID-19 is a newly invented virus that evolved into a pandemic. This virus affects mostly the respiratory system and could cause mild symptoms as fatigue, cough and in some cases even death.     There are more than 90 million cases worldwide and the death rate is relatively low at approximately 2\%. The virus up to this day, has affected millions of citizens in the entire planet. On a social level many people changed their lifestyle in order to prevent spreading the virus and protect themselves. Also, many people had to lose their jobs or transfer them on the web. Central banks have reduced policy interest rates and announced additional financing facilities in order to help both individuals and businesses to recover. Many computer scientists and physicians  created CNNs (Convolutional Neural Networks) in order to be able to detect from a chest X-ray if the patients suffer from COVID-19 or not and reduce the time that doctors have to spend with their patients. In order to create the models, they need large amounts of chest X-rays from COVID-19 patients and non-COVID-19 patients to achieve high accuracy and help physicians diagnose patients fast and securely. The most accurate network was ResNet-101 with 99.51\% accuracy. After the review of the papers two different versions of COVnet-101 were developed with 97.4\% and 91.5\% accuracy correspondingly.  
+\end{abstract}
+
+\section{Description}
+Coronavirus (COVID-19) is a newly infectious disease that has evolved into a pandemic in March 2020. Specifically, the first cases of Coronavirus (COVID-19) were detected in the city of Wuhan, China in December 2019 in a seafood wholesale market. A number of patients initially diagnosed with a form of pneumonia, that later discovered, through samples of sufferers, that originates from an unknown, till then, beta-coronavirus virus \cite{firstcases}.
+
+The most common symptoms of the virus today are fever, cough, fatigue, expectoration and shortness of breath. More rarely, sufferers experience headaches or dizziness, diarrhea, nausea and vomiting \cite{symptoms1}. Examining the samples from the sufferers, it was observed that some social groups are more likely to get infected and experience severe respiratory problems originated from the virus  [Figure: \ref{fig:CovidCasesChina}] \cite{patients}.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/cases-in-china.png}
+  \caption{Impact of cardiovascular metabolic diseases on COVID-19 in China}
+  \label{fig:CovidCasesChina}
+\end{figure}
+
+Coronavirus is a RNA positive-strand virus, thus has higher mutation rates than DNA virus. This is the reason why  Coronaviruses are easy to adopt in different environments in order to survive and reproduce. COVID-19 is life threatening to humans because the human body has not developed immunity to the virus. Patients' data is relatively encouraging since 85\% of COVID-19 patients suffered from mild infection, 10\% from severe and only 5\% of patients suffered from critical infection. Most critical COVID-19 cases are elderly people, people suffering from other diseases and individuals who have a weak immune system \cite{medicalCOVID}. This means that  COVID-19 is able to spread and reproduce easier and faster on the respiratory system of the patients and cause COVID-19 pneumonia [Figure: \ref{fig:xraycomparison}].
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.3]{assets/covid-vs-pneumonia-vs-normal.png}
+  \caption{Healthy person vs Normal Pneumonia vs COVID-19 Pneumonia}
+  \label{fig:xraycomparison}
+\end{figure}
+
+
+
+\section{Impact of COVID-19}
+
+\subsection{Cases}
+Although the first sign of COVID-19 was found in December 2019 there are more than 90 million cases of COVID-19 worldwide [Figure: \ref{fig:worldwidecases}]. More than 50 million patients recovered and the death rate is approximately 2\%. Up to this day, most cases are reported in the United States of America with 23 million cases, India with 10 million cases and Brazil with more than 8 million cases. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{assets/worldwide_plot.png}
+  \caption{COVID-19 worldwide cases.}
+  \label{fig:worldwidecases}
+\end{center}
+\end{figure}
+In Europe more than 26 million cases have been reported and the death rate is approximately 2\%. European countries with the most cases are Russia with more than 3 million cases, France with 2.5 million cases and the United Kingdom with 2.6 million cases.\par
+In Greece there have been reported more than 146 thousand cases [Figure: \ref{fig:greececases}] and the death rate is higher than the world average at 3.65\%. More than 93.7 thousand people have been recovered \cite{cases}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{assets/greece_plot.png}
+  \caption{COVID-19 Cases in Greece.}
+  \label{fig:greececases}
+  \end{center}
+\end{figure}
+
+\subsection{Cost}
+
+\subsubsection{Social cost}
+COVID-19 changed people's lives on a social level during the pandemic. People had to stay inside to prevent spending the virus and had to change their lifestyle and their habits. The pandemic affected people differently on a global level. Citizens had to be quarantined in their houses  and a large number of them either be unemployed or work from home. More and more people had to transfer their businesses on the web, in order to survive and most of the work needed to be done via a computer. Children from all different age groups attended online classes and most social events and conferences were held on online platforms. \par
+Another social impact of COVID-19 was the prioritization of admissions in medical centers. Hospitals were filled with patients and in extreme cases (Italy, Spain) doctors had to prioritize patients from the seriousness of their condition. There was a lack of medical equipment in some cases and also hospitals and medical centers could cure only patients with severe conditions. On a personal level people had to constantly wear face masks and sanitize regularly but also avoid unnecessary human contact in order to prevent spreading the virus \cite{symptoms2}.
+\subsubsection{Financial cost}
+    
+COVID-19 affected the world economy. Many countries such as the United Kingdom and Japan had to deal with a severe drop in their main index higher than 20\% and other countries with big technological companies, were benefited by the pandemic. More specifically, the IMF (International Monetary Fund) estimated that government stimulus packages during the pandemic amounted to 3.3 trillion \$ and additional loans amounted to 4.5 trillion \$. In many countries, central banks have reduced policy interest rate in order to urge borrowers to take out more loans to benefit them financially \cite{financial_cost}. 
+
+
+\section{Need for analytics}
+Nowadays, thanks to technological advancement, the living standard has been significantly increased. On the medical field, the necessary time to diagnose an illness has drastically decreased thanks to modern techniques and the help of computer scientists. More specifically, new applications with artificial intelligent techniques coupled with radiological imaging can help physicians detect diseases on patients faster and accurately. Another benefit is that these applications can be used especially in remote areas where there is a lack of specialized physicians. The physicians could use these applications to maximize the mean time that takes to diagnose a patient. \par
+
+    These applications could greatly benefit detection of COVID-19 since this virus is highly contagious among patients and physicians. This means that the physicians have to work in high workload conditions and interact with patients. Under these conditions the diagnosis should become faster and in certain cases, as in remote areas, could be done remotely. The applications need just a chest X-ray of the patients' chest to determine if they suffer from COVID-19 or not. In this view, the physicians and computer scientists need large amounts of X-ray images in order to trim models with high accuracy to make the diagnosis of COVID-19 a fast and secure process.
+
+
+\section{Review} 
+\subsection{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks}\cite {firstreview}  
+\\
+The first study focuses on the improvement of COVID-19 diagnosis process  and proposes artificial intelligent techniques for reliable and faster results from previous methods, such as computed tomography (CT). More specifically the study uses ten Convolutional Neural Networks (CNN) and explains the accuracy on each of them [Table: \ref{tab:table1}]. The network ResNet-101 \cite{resnet} achieved 99.51\% accuracy, the best one described in this study. In the study participated 108 patients (48 female and 60 male) positive with COVID-19 and 86 (35 female and 51 male)  non-COVID-19 patients. The age of COVID-19 positive is 50.22 $\pm$ 10.85 and of non-COVID-19 is 61.45 $\pm$ 15.04. In order to create the CNNs, the computed tomography images were converted to grayscale and reviewed by an experienced radiologist. In order to make the CNNs more efficient, for every different network used in the study, the input layer was replaced with a new one based on the size of COVID-19 infection patches and the dimensions of the last fully connected layer were set to the number of classes. The optimizer used was SGDM, the values of learning rate equals 0.01 and validation frequency was set to 5. The dataset is divided to 80\% train data and 20\% validation data. In each epoch the dataset was shuffled and if the training process stayed the same, the training process stopped.
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Results of 10 CNN}
+    \label{tab:table1}
+    \begin{tabular}{||c c c c c ||}
+      \hline 
+      \textbf{Reference} & \textbf{Network} & \textbf{Depth} & \textbf{Parameters} & \textbf{Accuracy(\%)}\\ 
+      \hline
+      \cite{alexnet} & AlexNet & 8 & 61 & 78.92  \\ % <--
+      \hline
+      \cite{vgg} & VGG-16 & 16 & 138 & 83.33  \\ % <--
+	  \hline
+      \cite{vgg} & VGG-19 & 19 & 144 & 85.29  \\ % <--
+      \hline 
+      \cite{squeezenet} & SqueezeNet & 18 & 1.24 & 82.84  \\ % <--
+      \hline
+      \cite{googlenet} & GoogleNet & 22 & 7 & 85.29  \\ % <--
+      \hline
+      \cite{mobilenet} & MobileNet-V2 & 53 & 3.5 & 92.16  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-18 & 18 & 11.7 & 91.67  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-50 & 50 & 25.6 & 94.12  \\ % <--
+      \hline
+      \cite{resnet} & ResNet-101 & 101 & 44.6 & 99.51  \\ % <--
+      \hline
+      \cite{xception} & Xception & 71 & 22.9 & 99.02  \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\subsection{Automated detection of COVID-19 cases using deep neural networks with X-ray images}\cite{secondreview}
+\\
+The second paper called “Automated detection of COVID-19 cases using deep neural networks with X-ray images” trained a CNN in order to detect if a person is healthy or suffers from COVID-19 or normal pneumonia. On the paper were used two different datasets. The first one was called "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}. The dataset does not contain enough metadata referring to patients nevertheless, there were 125 positive with COVID-19 patients from whom 43 were female and 83 were male. Another information is that out of 26 patients the average age of them was 55 years. The second dataset that was used was the “ChestX-ray8 database” which was developed by Wang et al. \cite{dataset2secondreview}. This dataset contained chest X-ray images with healthy patients and patients with normal pneumonia however, it does not provide any metadata for the patients. The network had two different variants. The first one was able to detect whether or not the patients suffer from COVID-19. In order to train the network, from the second dataset, only the chest X-rays with healthy patients  were used, to help the network to classify a patient as healthy or COVID-19 positive. In the second one, the network was able to detect if a patient is healthy or suffers from COVID-19 or suffers from normal pneumonia. For this network, all two datasets were combined in order to get all three different results. The network used was the “DarkCovidNet” [Figure:  \ref{fig:paper2architecture}] which is based on “Darknet-19” \cite{darknet}, the optimizer was Adam, crossentropy was used as a loss function and the learning rate was 3e-3. Finally, the accuracy for binary classification was 98.08\% and for categorical 87.02\%.
+
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/architecture-of-the-darkcovidnet-ozturk-tulin-et-al.png}
+  \caption{Architecture of the DarkCovidNet}
+  \label{fig:paper2architecture}
+\end{figure}
+
+\subsection{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier}\cite{thirdreview}
+\\
+This paper has a combination of features extracted from multi-CNN and used the Bayesnet classifier for the prediction of COVID-19. The networks that used were Squeezenet\cite{squeezenet}, Darknet-53\cite{darknetpaper3}, MobilenetV2\cite{mobilenet}, Xception\cite{xception} and Shufflenet\cite{shufflenet} in order to produce a feature matrix of dimensions 950x5000. Each network was pre-trained using Imagenet\cite{imagenet}. The feature matrix is passed to the Bayesnet classifier which classifies the images into COVID-19 and non-COVID categories. The first dataset is a combination of a dataset created by Cohen et al\cite{dataset1secondreview} and a dataset by Kaggle\cite{dataset1.2thirdreview} and has 453 COVID-19 images and 497 non-COVID images(bacterial, varial pneumonia) and had 91.16\% accuracy. The second dataset\cite{dataset2thirdreview} had 71 COVID-19 images and 7 non-COVID images and had 97.44\% accuracy. 
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/architecture-of-the-proposed-method-abraham-bejoy-et-al.png}
+  \caption{Architecture of the proposed method}
+  \label{fig:paper3architecture}
+\end{figure}
+
+\subsection{COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray Image}
+
+\cite{fourth_review}\\
+The paper called "COVIDX-Net: A Framework of Deep Learning Classifiers to Diagnose COVID-19 in X-Ray Image" used transfer learning methods of seven different architectures in order to propose a new network called “COVIDX-NET” [Figure: \ref{fig:paper4}]. The seven different networks were VGG19\cite{vgg}, DenseNet201\cite{densenet}, InceptionV3\cite{inception}, ResNetV2\cite{resnet}, InceptionResNetV2\cite{inception}, Xception\cite{xception}, and MobileNetV2\cite{mobilenet} and the network is able to detect COVID-19 from 2-dimensional chest X-ray images. 
+The images\cite{dataset1secondreview} \cite{dataset2fourthreview} scaled down to a fixed size of 244x244 and hot encoding was applied on the labels to classify them as COVID-19 positive or negative. The dataset was split to 80\% trained and 20\% validation data. Later a random sample of training images was selected to be applied to the deep learning classifier and then evaluation metrics are applied to record the set’s performance.  At the end, the data are tested on the tuned deep learning classifier in order to classify the X-ray as COVID-19 positive or negative. The dataset contains 50 Chest X-ray images, half of them (25) are positive cases and the highest accuracy was 90\% from the VGG19\cite{vgg} and DenseNet201\cite{densenet} models.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/fourth_review.png}
+  \caption{Workflow of proposed COVIDX-Net framework for classifying the COVID-19 status in X-Ray images.}
+  \label{fig:paper4}
+\end{figure}
+
+\subsection{Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection}
+
+\cite{fifth_paper} \\
+The fifth paper called “Viral Pneumonia Screening on Chest X-rays Using Confidence-Aware Anomaly Detection” focuses on the categorization of X-ray images as viral pneumonia (normal pneumonia), non-viral pneumonia and healthy. They propose a new model called “CAAD” from the acronyms Confidence-Aware Anomaly Detection [Figure: \ref{fig:paper5}]. The model contains a feature extractor and a confidence prediction module in order to be able to detect anomalies on images. When the confidence score is low, or the anomaly score is high, the images are considered to contain an anomaly. The major advantage of paper is the fact that they treat all viral pneumonia cases as anomalies to maximize the accuracy. The model used six stages of layer-by-layer convolution operations and each X-ray image is processed by MBConv blocks, and later they are transformed into a d-dimensional feature  vector by a global average pooling layer. The datasets used were the X-VIRAL dataset  with 5.977 viral pneumonia cases and 37.393 non-viral pneumonia or healthy cases and the X-COVID dataset\cite{dataset1secondreview} that contains 106 COVID-19 cases and 107 healthy cases. The highest accuracy was achieved was 80.65\% with the EfficientNet-B0\cite{efficientnet} network.
+
+\begin{figure}[H]
+\includegraphics[width=\linewidth]{assets/fifth_paper.png}
+  \caption{Diagram of the proposed CAAD model. This model is composed of an anomaly detection module and a confidence prediction module,
+which are designed to predict the anomaly score and confidence score of each input, respectively..}
+  \label{fig:paper5}
+\end{figure}
+
+\section{COVnet-101}
+
+\subsection{ResNet-101}
+\label{ResNet-101}
+For this exercise, instead of just reviewing papers, a custom neural network was developed based on the ResNet-101\cite{resnet}. In order to explain the custom network, the  ResNet should be presented. For its creation two networks were trained. More specifically, these two networks were a plain and a residual network. \par
+The plain network is inspired by the philosophy of VGG networks\cite{vgg} [Figure: \ref{fig:vggvsresnet}]. The filters used in the convolutional layers were mostly 3x3, the network ends with global averages pooling layer and 1000 way fully-connected layer with softmax and the total number of weighted layers is 34.\par
+The residual network is based on the plain network and the main difference is the addition of shortcut connections. These shortcuts function differently when the input and output have the same dimensions and when they do not. More accurately, when the input and output are not of the same dimensions, meaning that the dimensions are increasing, then there are two different scenarios: \par
+1. The shortcut performs identity mapping with extra zero entries padded for increasing dimensions and this option does not add any extra parameters.\par
+2. The projection shortcut is activated in order to match dimensions done by 1×1 convolutions.
+When the input and output are the same dimensions then the identity shortcuts are used on the network. \par
+    ResNet-101 was created with a residual network with 101 layers and 3-layer blocks in order to increase its accuracy.\par
+The ResNet-101 was trained using the dataset named “Imagenet 2012”\cite{imagenet}. This dataset has 1000 classes, the models are trained at 1.28 million images and evaluated on 50k validation images. In order to increase the number of images the ResNet-101 creators used data augmentation techniques, more specifically scale augmentation and color augmentation. The images were cropped to 224×244 from random parts either from the original image or from horizontal flipped copies from the images and they applied standard color augmentation \cite{imagenet}. To make the neural network faster and stable through normalization they used batch normalization\cite{batchnormalization} right after each convolution and before activation. \par
+ The optimizer was SGD with a mini-batch size of 256, the learning rate starts from 0.1 and is divided by 10 when the error plateaus and the models are trained for up to 60 × 104 iterations. They used a weight decay of 0.0001,  a momentum of 0.9 and dropout was not used\cite{dropout}.
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{assets/resnet-vs-vgg.png}
+  \caption{VGG vs ResNet}
+  \label{fig:vggvsresnet}
+  \end{center}
+\end{figure}
+
+\subsection{COVnet-101 network}
+COVnet-101, as mentioned in Section \ref{ResNet-101}, was based on ResNet-101. The method used is called “Transfer learning” meaning that ResNet-101 was used as a starting point to develop COVnet-101. \par
+The images used in COVnet-101  were re-sized to 128x128, then they were shuffled and normalized by dividing with 255. The input shape of the network is (5144, 128, 128 3), the batch size is 16, the optimizer is Adam, the learning rate is 0.01 and the number of epochs is equal to 10. \par
+There are two different versions of the network. The first one is called “COVID-19 vs Non-COVID-19” and it detects COVID-19 on patients from X-ray images. This implies that non-COVID-19 patients can be either healthy or suffer from other diseases instead of COVID-19. The second version is called  “COVID-19 vs Healthy vs Pneumonia” and it detects COVID-19, pneumonia and/or healthy patients from chest X-ray images. This version of the network is an improved version of "COVID-19 vs Non-COVID-19" since it can detect if a patient is healthy or suffers from COVID-19 or suffers from pneumonia. In other words, the main difference of the two versions is that, the version called "COVID-19 vs Healthy vs Pneumonia" can detect more than one malady from an image. \par 
+The dataset used for healthy and pneumonia chest X-ray images is from Kaggle created by Paul Mooney \cite{dataset1custom} and it contains 5,863 images. The datasets for COVID-19 detection were "A COVID-19 X-ray image database" which was developed by Cohen JP \cite{dataset1secondreview}, "COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid} as well as "Actualmed COVID-19 Chest X-ray Dataset Initiative" \cite{datasetcustomcovid}.  The total images are 6432 and the division to  trained / validation images percentage was 80\% / 20\%. 
+
+\subsection{COVID-19 vs Healthy vs Pneumonia}
+
+In order to be able to detect if a patient suffers from COVID-19 or suffers from pneumonia or does not suffer from neither diseases, we created the "COVID-19 vs Healthy vs Pneumonia" network. For the classifications were used the Loss function which was used is Categorical Crossentropy and the last’s layer function is Softmax because there were three different labels (COVID-19, Healthy, Pneumonia). \par
+The total parameters used on the network are 76,216,707, the trainable parameters are 33,558,531 and the non-trainable 42,658,176 [Table \ref{tab:table2}]. The accuracy of the network was 91,5\%
+
+\begin{table}[H]
+  \begin{center}
+    \caption{COVID-19 vs Healthy vs Pneumonia}
+    \label{tab:table2}
+    \begin{tabular}{||c c c ||}
+	  \hline
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Parameters}  \\  % <--
+      \hline
+      resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
+      \hline
+      flatten (Flatten) & (None, 32768) & 0 \\ % <--
+      \hline
+      dense (Dense) & (None, 1024) & 33555456 \\ % <--
+      \hline 
+      dropout (Dropout) & (None, 1024) & 0 \\ % <--
+      \hline
+      dense1 (Dense) & (None, 3) & 3075 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+
+\subsection{COVID-19 vs Non-COVID-19}
+
+In order to be able to detect if a patient suffers from COVID-19 or not, we created the "COVID-19 vs Non-COVID-19" network. More specifically, the Loss function is Binary Crossentropy and the last’s layer function is Sigmoid because there are just two different labels on the model (COVID-19, Non-COVID-19). \par
+The total parameters used on the network are76,214,657, the trainable parameters are 33,556,481 and the non-trainable 42,658,176 [Table: \ref{tab:table3}].The accuracy of the network was 97,4 \%
+
+\begin{table}[H]
+  \begin{center}
+    \caption{COVID-19 vs Non-COVID-19}
+    \label{tab:table3}
+    \begin{tabular}{||c c c ||}
+	  \hline
+      \textbf{Layer (type)} & \textbf{Output Shape} & \textbf{Parameters}  \\  % <--
+      \hline
+      resnet101 (Functional) & (None, 4, 4, 2048) & 42658176 \\ % <--
+      \hline
+      flatten (Flatten) & (None, 32768) & 0 \\ % <--
+      \hline
+      dense (Dense) & (None, 1024) & 33555456 \\ % <--
+      \hline 
+      dropout (Dropout) & (None, 1024) & 0 \\ % <--
+      \hline
+      dense1 (Dense) & (None, 1) & 1025 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\section{Results}
+
+The majority of papers focused on the creation of multiple networks. For instance the creation of both binary and categorical classification. However, the most accurate models were these with binary classification (COVID-19 vs Non-COVID-19). The first paper\cite{firstreview}, after training 10 Convolutional Neural Networks came to the conclusion that ResNet-101 \cite{resnet} had the best accuracy among the rest of the networks and was trained with a really minimal clinical dataset with complete metadata. Nonetheless, the other papers, despite their decent accuracy, the datasets they used did not have complete metadata and they used online datasets. The third paper \cite{thirdreview}, had also a really high accuracy with an even more minimal dataset than the first one \cite{firstreview}. The method used on this paper was quite different from the rest. Specifically, it extracted features from multiple Convolutional Neural Networks and used a Bayesnet classifier while the others used only exclusively pre-trained networks or transfer learning.  Our custom network, CovNet-101, and the second paper's network \cite{secondreview}, DarkCovidNet, had very close accuracy to the previous ones but their datasets had larger amounts of images. Finally, the fourth \cite{fourth_review} and the fifth \cite{fifth_paper} paper had lower accuracy than the others, meaning that they were not efficient enough. 
+
+
+\begin{table}[H]
+  \begin{center}
+    \caption{Results}
+    \label{tab:table4}
+    \begin{tabular}{||c c c c c c ||}
+      \hline 
+      \textbf{Reference} & \textbf{Problem} & \textbf{Method} & \textbf{Types of data} & \textbf{Sample size} & \textbf{Accuracy}\\ 
+      \hline
+      \cite{firstreview} & Binary Classification & ResNet-101 & Clinical & 108 patients & 99.51  \\ % <--
+      \hline
+      \cite{secondreview} & Binary Classification & DarkCovidNet & Online Datasets & 1127 images & 98.08 \\ % <--
+      \hline
+      \cite{thirdreview} & Binary Classification & Multi-CNN and Bayesnet & Online Datasets & 78 images & 97.44 \\ % <--
+      \hline
+       \cite{fourth_review} & Binary Classification & VGG19 and DenseNet201 & Online Datasets & 50 images & 90.00 \\ % <--
+      \hline
+       \cite{fifth_paper} & Binary Classification & CAAD & Online Datasets & 43583 images & 80.65 \\ % <--
+      \hline
+      Custom & Binary Classification & COVnet-101 & Online Datasets & 6432 images & 97.40 \\ % <--
+      \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\section{Future Work}
+In the future we would like to focus mainly on the network's optimization. We would like to increase their accuracy and make them run faster. Another option would be the creation of an informative system. The informative system could contain a mobile app which could scan chest X-rays and could classify them as either COVID-19 positive or COVID-19 negative in the case that the "COVID-19 vs Non-COVID-19" model or could classify them as COVID-19 positive or pneumonia positive or as healthy in the case that the "COVID-19 vs Healthy vs Pneumonia" model. The chest X-ray would be send to a cloud server with the  appropriate information of the patient (Disease, Patient ID, Age, Gender). The new chext X-rays could help the continuous training of the COVnet-101 and make it more accurate. At the end of the day a huge dataset could be created in order to help more scientists create their custom networks.
+ 
+
+\begin{thebibliography}{9}
+\bibitem{firstcases} 
+Zhu, Na, et al. 
+\textit{A novel coronavirus from patients with pneumonia in China, 2019.}. 
+New England Journal of Medicine (2020).
+
+\bibitem{symptoms1}
+Li, Long‐quan, et al.
+\textit{COVID‐19 patients' clinical characteristics, discharge rate, and fatality rate of meta‐analysis.}
+Journal of medical virology 92.6 (2020): 577-583.
+
+\bibitem{symptoms2} 
+Huang, Chaolin, et al. 
+\textit{Clinical features of patients infected with 2019 novel coronavirus in Wuhan, China.}.
+The lancet 395.10223 (2020): 497-506.
+
+\bibitem{patients}
+Li, Bo, et al. 
+\textit {Prevalence and impact of cardiovascular metabolic diseases on COVID-19 in China.} 
+Clinical Research in Cardiology 109.5 (2020): 531-538.
+
+\bibitem{medicalCOVID}
+Abdulamir, Ahmed S., and Rand R. Hafidh.
+\textit{The Possible Immunological Pathways for the Variable Immunopathogenesis of COVID--19 Infections among Healthy Adults, Elderly and Children.}
+Electronic Journal of General Medicine 17.4 (2020).
+
+\bibitem{firstreview}
+Ardakani, Ali Abbasian, et al. 
+\textit{Application of deep learning technique to manage COVID-19 in routine clinical practice using CT images: Results of 10 convolutional neural networks.}.
+Computers in Biology and Medicine (2020): 103795.
+
+\bibitem{alexnet}
+Krizhevsky Ilya Sutskever, et al. 
+\textit{Imagenet classification with deep convolutional neural networks.}. Advances in neural information processing systems. 2012.
+
+\bibitem{vgg}
+Simonyan, Karen, et al. 
+\textit {Very deep convolutional networks for large-scale image recognition.}. arXiv preprint arXiv:1409.1556 (2014).
+
+\bibitem{squeezenet}
+Iandola, Forrest N., et al. 
+\textit {SqueezeNet: AlexNet-level accuracy with 50x fewer parameters and< 0.5 MB model size.}. 
+arXiv preprint arXiv:1602.07360 (2016).
+
+\bibitem{googlenet}
+C. Szegedy et al. 
+\textit{Going deeper with convolutions}
+2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Boston, MA, 2015, pp. 1-9, doi: 10.1109/CVPR.2015.7298594.
+
+\bibitem{mobilenet}
+M. Sandler, A. Howard et al. 
+\textit{MobileNetV2: Inverted Residuals and Linear Bottlenecks}
+2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition, Salt Lake City, UT, 2018, pp. 4510-4520, doi: 10.1109/CVPR.2018.00474.
+
+\bibitem{resnet}
+K. He, X. Zhang, et al. 
+\textit{Deep Residual Learning for Image Recognition.}. 
+2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR), Las Vegas, NV, 2016, pp. 770-778, doi: 10.1109/CVPR.2016.90.
+
+\bibitem{xception}
+Chollet, François. 
+\textit{Xception: Deep learning with depthwise separable convolutions.}. Proceedings of the IEEE conference on computer vision and pattern recognition. 2017.
+
+\bibitem{secondreview}
+Ozturk, Tulin, et al. 
+\textit{Automated detection of COVID-19 cases using deep neural networks with X-ray images}. 
+Computers in Biology and Medicine (2020): 103792.
+
+\bibitem{darknet}
+Redmon, Joseph et al.
+\textit{YOLO9000: better, faster, stronger.}.
+Proceedings of the IEEE conference on computer vision and pattern recognition. 2017.
+
+\bibitem{dataset1secondreview}
+J.P. Cohen
+\textit{COVID-19 Image Data Collection. 2020.}
+https://github.com/ieee8023/COVID-chestxray-dataset.
+
+\bibitem{dataset2secondreview}
+X. Wang et al. 
+\textit{Chestx-ray8: hospital-scale chest x-ray database and benchmarks on weakly-supervised classification and localization of common thorax diseases}
+Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 2017, pp. 2097–2106.
+
+\bibitem{thirdreview}
+Abraham, Bejoy et al. 
+\textit{Computer-aided detection of COVID-19 from X-ray images using multi-CNN and Bayesnet classifier.}.
+Biocybernetics and biomedical engineering 40.4 (2020): 1436-1445.
+
+\bibitem{dataset1.2thirdreview}
+Kermany, et al.
+\textit{Identifying medical diagnoses and treatable diseases by image-based deep learning.}.
+Cell 172.5 (2018): 1122-1131.
+
+\bibitem{dataset2thirdreview}
+Dadario AMV. Covid-19 X rays; 2020.
+\textit{http://dx.doi.org/10.34740/KAGGLE/DSV/101946}. 
+Available from:https://www.kaggle.com/dsv/1019469. 
+
+\bibitem{imagenet}
+Deng J et al.
+\textit{Imagenet: alarge-scale hierarchical image database.}.
+2009 IEEEConference on Computer Vision and Pattern Recognition.IEEE; 2009. p. 248–55.
+
+\bibitem{shufflenet}
+Zhang X et al.
+\textit{Shufflenet: an extremelyefficient convolutional neural network for mobile devices.}.
+Proceedings of the IEEE Conference on Computer Visionand Pattern Recognition; 2018. p. 6848–56.
+
+\bibitem{darknetpaper3}
+Redmon J et al. 
+\textit{Yolov3: an incremental improvement.}.
+2018, arXiv preprint arXiv:1804.02767
+
+\bibitem{dataset1custom}
+Paul Mooney. Chest X-Ray Images (Pneumonia); 2017
+\textit{Kaggle.}.
+Available from: https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia. 
+
+\bibitem{datasetcustomcovid}
+Wang et al.
+\textit{COVID-Net: a tailored deep convolutional neural network design for detection of COVID-19 cases from chest X-ray images}
+2020, https://doi.org/10.1038/s41598-020-76550-z
+
+\bibitem{batchnormalization}
+S. Ioffe and C. Szegedy. 
+\textit{Batch normalization: Accelerating deep
+network training by reducing internal covariate shift.}.
+In ICML, 2015.
+
+\bibitem{dropout}
+G. E. Hinton et al. 
+\textit{Improving neural networks by preventing co-
+adaptation of feature detectors.}.
+arXiv:1207.0580, 2012.
+
+\bibitem{financial_cost}
+Akhtaruzzaman, Md, Sabri Boubaker, and Ahmet Sensoy
+\textit{"Financial contagion during COVID–19 crisis."}.
+Finance Research Letters (2020): 101604.
+
+\bibitem{fourth_review}
+Hemdan, Ezz El-Din, Marwa A. Shouman, and Mohamed Esmail Karar. 
+\textit{"Covidx-net: A framework of deep learning classifiers to diagnose covid-19 in x-ray images."}
+arXiv preprint arXiv:2003.11055 (2020).
+
+\bibitem{dataset2fourthreview}
+Pyimagesearch
+\textit{Medical dataset}
+Available from https://www.pyimagesearch.com/category/medical/
+
+\bibitem{densenet}
+G. Huang et al. 
+\textit{"Densely connected convolutional
+networks," in Proceedings - 30th IEEE Conference on Computer Vision and Pattern Recognition.}.
+CVPR 2017 vol. 2017-January, ed: Institute of Electrical and Electronics Engineers Inc., 2017, pp. 2261-2269.
+
+\bibitem{inception}
+C. Szegedy et al.
+\textit{"Rethinking the Inception Architecture for
+Computer Vision".}.
+2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR),
+2016, pp. 2818-2826.
+
+\bibitem{fifth_paper}
+Zhang, Jianpeng, et al. 
+\textit{"Covid-19 screening on chest x-ray images using deep learning based anomaly detection."}.
+arXiv preprint arXiv:2003.12338 (2020).
+
+\bibitem{efficientnet}
+M. Tan and Q. Le
+\textit{“Efficientnet: Rethinking model scaling for convolutional neural networks.”}
+International Conference on Machine Learning, 2019, pp. 6105–6114.
+
+\bibitem{cases}
+EU Open Data Portal
+\textit{COVID-19 Coronavirus data.}
+Avaliable from: https://data.europa.eu/euodp/en/data/dataset/covid-19-coronavirus-data
+\end{thebibliography}
+\end{document}
